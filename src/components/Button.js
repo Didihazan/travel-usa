@@ -6,7 +6,7 @@
 //   );
 // }
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import './Button.css';
 import { Link } from 'react-router-dom';
 
@@ -19,16 +19,20 @@ export const Button = ({
                            type,
                            onClick,
                            buttonStyle,
-                           buttonSize
+                           buttonSize,
                        }) => {
+
+
+
     const checkButtonStyle = STYLES.includes(buttonStyle)
         ? buttonStyle
         : STYLES[0];
 
     const checkButtonSize = SIZES.includes(buttonSize) ? buttonSize : SIZES[0];
 
+
     return (
-        <Link to='/sign-up' className='btn-mobile'>
+        <Link to={children==="SIGN UP"?'/sign-up':'/log-in'} className='btn-mobile'>
             <button
                 className={`btn ${checkButtonStyle} ${checkButtonSize}`}
                 onClick={onClick}
@@ -36,6 +40,7 @@ export const Button = ({
             >
                 {children}
             </button>
-        </Link>
+         </Link>
+
     );
 };
