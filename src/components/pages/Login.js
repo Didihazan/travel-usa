@@ -8,12 +8,12 @@ export default function Login() {
             <form className="login-form">
                 <input
                     type="text"
-                    placeholder="Username"
+                    placeholder="Username.."
                     className="login-input"
                 />
                 <input
                     type="password"
-                    placeholder="Password"
+                    placeholder="Password.."
                     className="login-input"
                 />
                 <button type="submit" className="login-button">
