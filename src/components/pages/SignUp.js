@@ -3,17 +3,44 @@ import '../Signup.css'
 import '../../App.css';
 
 export default function SignUp() {
+    const handlePhoneNumberChange = (event) => {
+        const inputValue = event.target.value;
+        const numericValue = inputValue.replace(/\D/g, '').slice(0, 10);
+        if (inputValue !== numericValue) {
+            event.target.value = numericValue;
+            event.target.setCustomValidity('Numbers only');
+        } else {
+            event.target.setCustomValidity('');
+        }
+    };
+
     return (
         <div className="signup-container">
             <form className="signup-form">
                 <input
                     type="text"
-                    placeholder="Username"
+                    placeholder="Name.."
                     className="signup-input"
                 />
                 <input
+                    type="text"
+                    placeholder="Last Name.."
+                    className="signup-input"
+                />
+                <input
+                    type="email"
+                    placeholder="Email.."
+                    className="signup-input"
+                />
+                <input
+                    type="tel"
+                    placeholder="Phone Number.."
+                    className="signup-input"
+                    onChange={handlePhoneNumberChange}
+                />
+                <input
                     type="password"
-                    placeholder="Password"
+                    placeholder="Password.."
                     className="signup-input"
                 />
                 <button type="submit" className="signup-button">
@@ -23,3 +50,4 @@ export default function SignUp() {
         </div>
     );
 }
+
