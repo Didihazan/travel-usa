@@ -102,14 +102,6 @@ function Footer() {
                         >
                             <i className='fab fa-twitter' />
                         </Link>
-                        <Link
-                            className='social-icon-link twitter'
-                            to='/'
-                            target='_blank'
-                            aria-label='LinkedIn'
-                        >
-                            <i className='fab fa-linkedin' />
-                        </Link>
                     </div>
                 </div>
             </section>
