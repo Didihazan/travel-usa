@@ -7,8 +7,8 @@ export default function Login() {
         <div className="login-container">
             <form className="login-form">
                 <input
-                    type="text"
-                    placeholder="Username.."
+                    type="email"
+                    placeholder="Email.."
                     className="login-input"
                 />
                 <input
@@ -23,4 +23,3 @@ export default function Login() {
         </div>
     );
 }
-//hshshs
