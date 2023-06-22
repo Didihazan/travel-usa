@@ -31,13 +31,13 @@ export default function Login(prop) {
         <div className="login-container">
             <form className="login-form" onSubmit={HandleLogin}>
                 <input
-                    type="text"
-                    placeholder="Username"
+                    type="email"
+                    placeholder="Email.."
                     className="login-input"
                 />
                 <input
                     type="password"
-                    placeholder="Password"
+                    placeholder="Password.."
                     className="login-input"
                 />
                 <button type="submit" className="login-button" >
