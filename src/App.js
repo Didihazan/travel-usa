@@ -18,7 +18,7 @@ function App() {
           <Switch>
             <Route path='/'  element={<Home/>} />
             <Route path='/services' element={<Services/>} />
-            <Route path='/products' element={<Products/>} />
+            <Route path='/products' element={<Stays/>} />
             <Route path='/sign-up' element={<SignUp/>} />
             <Route path='/log-in' element={<Login setIsAuthenticated = {setIsAuthenticated} user ={user} setuser={setUser}/>} />
           </Switch>
