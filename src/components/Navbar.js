@@ -3,7 +3,7 @@ import { Button } from './Button';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 
-function Navbar() {
+function Navbar(prop) {
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
 
@@ -80,8 +80,8 @@ function Navbar() {
                             </Link>
                         </li>
                     </ul>
-                    {button && <Button buttonStyle='btn--outline'>SIGN UP</Button>}
-                    {button && <Button buttonStyle='btn--outline' >LOG IN</Button>}
+                    {button && !prop.isAuthenticated && <Button buttonStyle='btn--outline'>SIGN UP</Button>}
+                    {button && !prop.isAuthenticated &&<Button buttonStyle='btn--outline' >LOG IN</Button>}
                 </div>
             </nav>
         </>

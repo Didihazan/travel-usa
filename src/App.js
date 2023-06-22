@@ -10,6 +10,7 @@ import './App.css';
 
 function App() {
     const [isAuthenticated,setIsAuthenticated] = useState(false)
+    const [user , setUser]= useState({})
   return (
       <>
         <Router>
@@ -19,7 +20,7 @@ function App() {
             <Route path='/services' element={<Services/>} />
             <Route path='/products' element={<Products/>} />
             <Route path='/sign-up' element={<SignUp/>} />
-            <Route path='/log-in' element={<Login setIsAuthenticated = {setIsAuthenticated}/>} />
+            <Route path='/log-in' element={<Login setIsAuthenticated = {setIsAuthenticated} user ={user} setuser={setUser}/>} />
           </Switch>
         </Router>
       </>
