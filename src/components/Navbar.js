@@ -80,8 +80,8 @@ function Navbar(prop) {
                             </Link>
                         </li>
                     </ul>
-                    {button && !prop.isAuthenticated && <Button buttonStyle='btn--outline'>SIGN UP</Button>}
-                    {button && !prop.isAuthenticated &&<Button buttonStyle='btn--outline' >LOG IN</Button>}
+                    {button && !prop.isAuthenticated && <Button buttonStyle='btn--outline' path='/sign-up'>SIGN UP</Button>}
+                    {button && !prop.isAuthenticated &&<Button buttonStyle='btn--outline' path='/log-in'>LOG IN</Button>}
                 </div>
             </nav>
         </>

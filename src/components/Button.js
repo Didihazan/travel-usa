@@ -6,7 +6,7 @@
 //   );
 // }
 
-import React, {useEffect} from 'react';
+;
 import './Button.css';
 import { Link } from 'react-router-dom';
 
@@ -20,6 +20,7 @@ export const Button = ({
                            onClick,
                            buttonStyle,
                            buttonSize,
+                           path
                        }) => {
 
 
@@ -32,7 +33,7 @@ export const Button = ({
 
 
     return (
-        <Link to={children==="SIGN UP"?'/sign-up':'/log-in'} className='btn-mobile'>
+        <Link to={path?path:"/"} className='btn-mobile'>
             <button
                 className={`btn ${checkButtonStyle} ${checkButtonSize}`}
                 onClick={onClick}
