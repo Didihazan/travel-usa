@@ -6,7 +6,7 @@
 //   );
 // }
 
-;
+// import React, {useEffect} from 'react';
 import './Button.css';
 import { Link } from 'react-router-dom';
 
