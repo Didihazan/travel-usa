@@ -1,6 +1,7 @@
 import React from 'react';
 import '../Signup.css'
 import '../../App.css';
+import Layout from "../Layout";
 
 export default function SignUp() {
     const handlePhoneNumberChange = (event) => {
@@ -15,6 +16,7 @@ export default function SignUp() {
     };
 
     return (
+        <Layout>
         <div className="signup-container">
             <form className="signup-form">
                 <input
@@ -48,6 +50,7 @@ export default function SignUp() {
                 </button>
             </form>
         </div>
+        </Layout>
     );
 }
 

@@ -43,6 +43,15 @@ function Navbar(prop) {
                         </li>
                         <li className='nav-item'>
                             <Link
+                                to='/stays'
+                                className='nav-links'
+                                onClick={closeMobileMenu}
+                            >
+                                Stays
+                            </Link>
+                        </li>
+                        <li className='nav-item'>
+                            <Link
                                 to='/services'
                                 className='nav-links'
                                 onClick={closeMobileMenu}
@@ -52,14 +61,13 @@ function Navbar(prop) {
                         </li>
                         <li className='nav-item'>
                             <Link
-                                to='/products'
+                                to='/gallery'
                                 className='nav-links'
                                 onClick={closeMobileMenu}
                             >
-                                Products
+                                Gallery
                             </Link>
                         </li>
-
                         <li>
                             <Link
                                 to='/sign-up'
