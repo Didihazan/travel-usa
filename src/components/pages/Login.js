@@ -2,6 +2,7 @@
 import {useNavigate } from "react-router-dom";
 import '../Login.css'
 import '../../App.css';
+import Layout from "../Layout";
 
 
 export default function Login(prop) {
@@ -13,11 +14,11 @@ export default function Login(prop) {
         let url ="http://localhost:3001/users"
         fetch(url).then((result)=> {return result.json()}).then((data)=>{
             data.forEach(user =>{
-                        if (user.password === pass && user.userName === name){
-                            prop.setIsAuthenticated(true)
-                            prop.setuser(user)
-                        }
-                    })
+                if (user.password === pass && user.userName === name){
+                    prop.setIsAuthenticated(true)
+                    prop.setuser(user)
+                }
+            })
         })
         if (prop.user){
             return navigate("/")
@@ -28,6 +29,7 @@ export default function Login(prop) {
 
 
     return (
+        <Layout>
         <div className="login-container">
             <form className="login-form" onSubmit={HandleLogin}>
                 <input
@@ -45,5 +47,6 @@ export default function Login(prop) {
                 </button>
             </form>
         </div>
+        </Layout>
     );
 }
