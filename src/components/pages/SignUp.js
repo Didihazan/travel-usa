@@ -16,7 +16,7 @@ export default function SignUp() {
     };
 
     return (
-        <Layout>
+        
         <div className="signup-container">
             <form className="signup-form">
                 <input
@@ -50,7 +50,7 @@ export default function SignUp() {
                 </button>
             </form>
         </div>
-        </Layout>
+        
     );
 }
 
