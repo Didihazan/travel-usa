@@ -95,8 +95,10 @@ export default function BookingForm() {
     return (
         <Layout>
             <div className="container">
-                <div>
+                <div className="h2">
                     <h2>Resorts</h2>
+                </div>
+                <div className="h3">
                     <h3>Treat yourself! Your dream resort stay is just a few clicks away.</h3>
                 </div>
               {/*Form*/}
@@ -186,7 +188,9 @@ export default function BookingForm() {
                 </div>
             )}
             </div>
-
+<div className="pSentence">
+    <p>“We travel not to escape life, but for life not to escape us”</p>
+</div>
         </Layout>
     );
 }

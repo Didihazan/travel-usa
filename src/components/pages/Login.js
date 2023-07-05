@@ -29,7 +29,7 @@ export default function Login(prop) {
 
 
     return (
-        <Layout>
+        
         <div className="login-container">
             <form className="login-form" onSubmit={HandleLogin}>
                 <input
@@ -47,6 +47,6 @@ export default function Login(prop) {
                 </button>
             </form>
         </div>
-        </Layout>
+        
     );
 }
