@@ -6,6 +6,6 @@ export default function Gallery() {
     return(
         <Layout>
             <h1 className='services'>Gallery</h1>
-        </Layout>
+         </Layout>
     );
 }

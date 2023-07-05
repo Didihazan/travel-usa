@@ -11,6 +11,7 @@ import './App.css';
 
 
 
+
 function App() {
     const [isAuthenticated,setIsAuthenticated] = useState(false)
     const [user , setUser]= useState({})
@@ -27,6 +28,7 @@ function App() {
                     <Route path='/log-in' element={<Login setIsAuthenticated = {setIsAuthenticated} user ={user} setuser={setUser}/>} />
                 </Switch>
             </Router>
+
         </>
     );
 }
