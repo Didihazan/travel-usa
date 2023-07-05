@@ -1,0 +1,54 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'PT Sans', sans-serif;
+}
+
+.home,
+.services,
+.stays,
+.sign-up,
+.log-in,
+gallery{
+  display: flex;
+  height: 90vh;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+}
+
+/*.services {*/
+/*  background-image: url('/public/images/singup.jpg');*/
+/*  background-position: center;*/
+/*  background-size: cover;*/
+/*  background-repeat: no-repeat;*/
+/*  color: #fff;*/
+/*  font-size: 100px;*/
+/*}*/
+
+/*.stays {*/
+/*  background-image: url('/public/images/login.jpg');*/
+/*  background-position: center;*/
+/*  background-repeat: no-repeat;*/
+/*  color: #fff;*/
+/*  font-size: 100px;*/
+/*}*/
+
+/*.sign-up {*/
+/*  background-image: url('/public/images/singup.jpg');*/
+/*  background-position: center;*/
+/*  background-size: cover;*/
+/*  background-repeat: no-repeat;*/
+/*  color: #fff;*/
+/*  font-size: 100px;*/
+/*}*/
+
+/*.log-in {*/
+/*  background-image: url('/public/images/login.jpg');*/
+/*  background-position: center;*/
+/*  background-size: cover;*/
+/*  background-repeat: no-repeat;*/
+/*  color: #fff;*/
+/*  font-size: 100px;*/
+/*}*/
