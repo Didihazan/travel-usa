@@ -1,0 +1,7 @@
+{
+  "env": {
+    "MONGO_USERNAME":"jmoshe052",
+    "MONGO_PASSWORD": "MongoDB100197",
+    "JWT_KEY": "api project"
+  }
+}
