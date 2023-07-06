@@ -7,18 +7,18 @@ const morgan = require('morgan')
 const mongoose = require('mongoose')
 // const checkAuth = require("./api/middlewares/checkAuth");
 const app = express()
+const cors = require('cors');
+
 mongoose.
 connect(`mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@a-new-travel-project.suijbad.mongodb.net/?retryWrites=true&w=majority`, {
     useNewUrlParser: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-    useUnifiedTopology: true,
+    useUnifiedTopology: true
 })
 
 mongoose.connection.on('connected', () => {
     console.log('MongoDB connected')
 })
-
+app.use(cors());
 app.use(morgan('dev'))
 app.use('/uploads', express.static('uploads'))
 app.use((req, res, next) => {
