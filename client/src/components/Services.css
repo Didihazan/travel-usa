@@ -1,9 +1,108 @@
+.service-page {
+    display: flex;
+    background-color: #ffffff;
+}
 
+/* Search */
+.search-card {
+    flex-grow: 1;
+    background-color: #ffffff;
+    padding: 40px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Changed from flex-end to space-between */
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    flex: 1;
+}
+
+.input-form {
+    width: 100%;
+    padding: 15px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+}
+
+.input-form input[type="text"],
+.input-form input[type="date"] {
+    flex: 1;
+    border: none;
+    background-color: transparent;
+    padding: 10px; /* Increased input field padding */
+}
+.input-form input[type="number"] {
+    flex: 1;
+    border: none;
+    background-color: transparent;
+    padding: 10px; /* Increased input field padding */
+    -moz-appearance: textfield; /* Firefox */
+}
+
+.input-form input[type="number"]::-webkit-inner-spin-button,
+.input-form input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none; /* WebKit browsers */
+    margin: 0; /* Remove default margin */
+    display: none; /* Hide the spin buttons */
+}
+
+.input-form label {
+    margin-right: 10px;
+    color: #999;
+}
+
+.guests-input {
+    display: flex;
+    align-items: center;
+}
+
+.guests-input button {
+    padding: 5px 10px;
+    border-radius: 3px;
+    background-color: #f0f0f0;
+    border: none;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.search-button-service {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    background-color: #e50914;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-left: 10px;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.search-button-service:hover {
+    background-color: #c00;
+}
+
+
+/* Cards */
 .cards {
     display: flex;
-    justify-content: center; /* Center the cards horizontally */
-    align-items: center; /* Center the cards vertically */
-    flex-wrap: wrap; /* Allow cards to wrap to the next line */
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 .card {
@@ -22,17 +121,17 @@
 }
 
 .picture {
-    flex: 1; /* Occupy remaining space */
+    flex: 1;
     display: flex;
-    align-items: center; /* Align items vertically */
-    justify-content: center; /* Align items horizontally */
+    align-items: center;
+    justify-content: center;
     border-radius: 10px 0 0 10px;
 }
 
 .picture img {
     max-width: 100%;
-    max-height: 100%; /* Occupy maximum height without overflow */
-    object-fit: contain; /* Maintain aspect ratio and fit the image */
+    max-height: 100%;
+    object-fit: contain;
     border-radius: 10px 0 0 10px;
 }
 
@@ -42,24 +141,20 @@
 }
 
 .title {
-    margin-left: 60%;
-    font-size: 20px;
-    color: #333333;
+    display: flex;
     justify-content: space-between;
-    flex-wrap: wrap; /* Allow title and prices to wrap to the next line if needed */
+    align-items: center;
 }
 
 .price {
-    display: inline-block;
     font-size: 22px;
     font-weight: bold;
     color: #333333;
-    margin-left: auto;
-    white-space: nowrap; /* Prevent line breaks */
+    white-space: nowrap;
 }
 
 .price .amount {
-    margin-right: 5px; /* Add spacing between the amount and currency */
+    margin-right: 5px;
 }
 
 .price .currency {
@@ -67,16 +162,14 @@
 }
 
 .discount {
-    display: inline-block;
     font-size: 18px;
     text-decoration: line-through;
     color: #999;
-    margin-left: auto;
-    white-space: nowrap; /* Prevent line breaks */
+    white-space: nowrap;
 }
 
 .discount .amount {
-    margin-right: 5px; /* Add spacing between the amount and currency */
+    margin-right: 5px;
 }
 
 .discount .currency {
@@ -125,21 +218,19 @@
     }
 
     .title h2 {
-        font-size: 24px; /* Increase the font size of the title */
+        font-size: 24px;
     }
 
     .price {
-        display: inline;
         font-size: 16px;
         text-align: right;
-        margin-left: auto; /* Align the numbers to the right */
+        margin-left: auto;
     }
 
     .discount {
         text-align: right;
-        display: inline;
         font-size: 14px;
-        margin-left: auto; /* Align the discounts to the right */
+        margin-left: auto;
     }
 
     .hotel img,
@@ -151,7 +242,6 @@
 
     .dates,
     .details {
-        display: inline;
         font-size: 14px;
     }
 }
