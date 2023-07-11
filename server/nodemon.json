@@ -2,6 +2,8 @@
   "env": {
     "MONGO_USERNAME":"jmoshe052",
     "MONGO_PASSWORD": "MongoDB100197",
-    "JWT_KEY": "api project"
+    "JWT_KEY": "api project",
+    "MOBGO_DB_ATLAS":"mongodb+srv://jmoshe052:MongoDB100197@a-new-travel-project.suijbad.mongodb.net/?retryWrites=true&w=majority"
+
   }
 }
