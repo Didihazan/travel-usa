@@ -1,26 +1,38 @@
-const express = require('express')
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const mongoose = require('mongoose');
 
-const morgan = require('morgan')
-// const articlesRoutes = require('./api/routes/articles')
-// const categoriesRoutes = require('./api/routes/categories')
-// const userRoutes = require('./api/routes/users')
-const mongoose = require('mongoose')
-// const checkAuth = require("./api/middlewares/checkAuth");
-const app = express()
-const cors = require('cors');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
 
-mongoose.
-connect(`mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@a-new-travel-project.suijbad.mongodb.net/?retryWrites=true&w=majority`, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
+const app = express();
 
-mongoose.connection.on('connected', () => {
-    console.log('MongoDB connected')
-})
-app.use(cors());
-app.use(morgan('dev'))
-app.use('/uploads', express.static('uploads'))
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
+
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+mongoose
+    .connect(process.env.MOBGO_DB_ATLAS, {
+      useNewUrlParser: true,
+      // useCreateIndex: true,
+      // useFindAndModify: false,
+      useUnifiedTopology: true
+      // dbName: process.env.DBNAME
+    })
+    .then(() => {
+      console.log(`connection to mongoose  succeed ! `);
+    })
+    .catch(err => {
+      console.log(err);
+    });
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*')
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization')
@@ -30,26 +42,25 @@ app.use((req, res, next) => {
     }
     next()
 })
-app.use(express.json())
-app.use(express.urlencoded({
-    extended: false
-}))
-// routes
-// app.use('/articles', articlesRoutes)
-// app.use('/categories',checkAuth, categoriesRoutes)
-// app.use('/users', userRoutes)
-app.use((req, res, next) => {
-    const error = new Error('Not Found')
-    error.status = 404
-    next(error)
-})
-app.use((error, req, res, next) => {
-    res.status(error.status || 500)
-    res.json({
-        error: {
-            message: error.message
-        }
-    })
-})
 
-module.exports = app
+
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  next(createError(404));
+});
+
+// error handler
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
+});
+
+module.exports = app;
