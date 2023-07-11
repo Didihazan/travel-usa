@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import '../Signup.css'
+import '../Signup.css';
 import '../../App.css';
+import axios from 'axios';
+import {useNavigate} from 'react-router-dom';
 
-import axios, {request} from 'axios';
-import {useNavigate} from "react-router-dom";
 export default function SignUp(setIsAuthenticated) {
     let navigate = useNavigate()
     const [formData, setFormData] = useState({
@@ -14,6 +14,8 @@ export default function SignUp(setIsAuthenticated) {
         phone: '',
         password: ''
     });
+    const [prefix, setPrefix] = useState('050'); // State for prefix selection
+
     const handleChange = (event) => {
         const { name, value } = event.target;
         if (name === 'phone') {
@@ -24,15 +26,19 @@ export default function SignUp(setIsAuthenticated) {
                 event.target.reportValidity();
                 event.target.value = numericValue
             }
-            } else {
-                event.target.setCustomValidity('');
-            }
+        } else {
+            event.target.setCustomValidity('');
+        }
         setFormData({
             ...formData,
             [event.target.name]: event.target.value
 
         });
 
+    };
+
+    const handlePrefixChange = (event) => {
+        setPrefix(event.target.value);
     };
     const validateEmailAndPassword = (email, password) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -44,6 +50,23 @@ export default function SignUp(setIsAuthenticated) {
             isValidPassword
         };
     };
+    const validateForm = (phoneNumber, email) => {
+        const phoneNumberRegex = /^(050-|052-|053-|054-|055-|058-)-?\d{7}$/;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        const errors = {};
+
+        if (!phoneNumberRegex.test(phoneNumber)) {
+            errors.phoneNumber =
+                'Invalid phone number.';
+        }
+
+        if (!emailRegex.test(email)) {
+            errors.email = 'Invalid email format. Please enter a valid email address.';
+        }
+
+        return errors;
+    };
 
     const HandleSinUp =  async (event) => {
         event.preventDefault();
@@ -52,14 +75,13 @@ export default function SignUp(setIsAuthenticated) {
         if(!isValidEmail){
             event.target[2].setCustomValidity('Invalid email format. Please enter a valid email address.');
             return event.target[2].reportValidity();
-            }
+        }
         if(!isValidPassword){
             event.target[4].setCustomValidity('The password must contain at least one uppercase letter, one lowercase letter, and one number')
             return event.target[4].reportValidity();
         }
 
-
-        const url = "http://localhost:3001/users/signup";
+        const url = 'http://localhost:3001/users/signup'; // Replace with your API endpoint URL
 
         const Data = {
             name:formData.name,
@@ -84,21 +106,19 @@ export default function SignUp(setIsAuthenticated) {
 
 
     return (
-
         <div className="signup-container">
             <form className="signup-form" onSubmit={HandleSinUp}>
                 <input
                     type="text"
-                    name= "name"
+                    name="name"
                     placeholder="Name.."
                     className="signup-input"
                     onChange={handleChange}
                     value={formData.name}
-                    // required
                 />
                 <input
                     type="text"
-                    name= "lastName"
+                    name="lastName"
                     placeholder="Last Name.."
                     className="signup-input"
                     onChange={handleChange}
@@ -107,26 +127,40 @@ export default function SignUp(setIsAuthenticated) {
                 />
                 <input
                     type="email"
-                    name= "email"
+                    name="email"
                     placeholder="Email.."
                     className="signup-input"
                     value={formData.email}
                     onChange={handleChange}
                     required
-
                 />
-                <input
-                    type="tel"
-                    name="phone"
-                    placeholder="Phone Number.."
-                    className="signup-input"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    required
-                />
+                <div className="phone-input-group">
+                    <select
+                        name="prefix"
+                        className="phone-prefix"
+                        onChange={handlePrefixChange}
+                        value={prefix}
+                    >
+                        <option value="050-">050-</option>
+                        <option value="052-">052-</option>
+                        <option value="053-">053-</option>
+                        <option value="054-">054-</option>
+                        <option value="055-">055-</option>
+                        <option value="058-">058-</option>
+                    </select>
+                    <input
+                        type="tel"
+                        name="phone"
+                        placeholder="Phone Number.."
+                        className="phone-number"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
                 <input
                     type="password"
-                    name= "password"
+                    name="password"
                     placeholder="Password.."
                     className="signup-input"
                     onChange={handleChange}
@@ -141,4 +175,3 @@ export default function SignUp(setIsAuthenticated) {
 
     );
 }
-
