@@ -34,26 +34,38 @@ export default function SignUp(setIsAuthenticated) {
         });
 
     };
-    // Checking the correctness of a phone number end amail
-    const validateEmail = (email) => {
+    const validateEmailAndPassword = (email, password) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,20}$/;
+        const isValidEmail = emailRegex.test(email);
+        const isValidPassword = passwordRegex.test(password);
+        return {
+            isValidEmail,
+            isValidPassword
+        };
     };
 
     const HandleSinUp =  async (event) => {
         event.preventDefault();
-        const check = validateEmail(event.target[2].value)
-        console.log(Object.keys(check).length ===2,check.email)
-        if(!check){
+        const { email, password } = formData;
+        const { isValidEmail, isValidPassword } = validateEmailAndPassword(email, password);
+        if(!isValidEmail){
             event.target[2].setCustomValidity('Invalid email format. Please enter a valid email address.');
             return event.target[2].reportValidity();
+            }
+        if(!isValidPassword){
+            event.target[4].setCustomValidity('The password must contain at least one uppercase letter, one lowercase letter, and one number')
+            return event.target[4].reportValidity();
         }
-        const url = "http://localhost:3001/users/signup"; // Replace with your API endpoint URL
+
+
+        const url = "http://localhost:3001/users/signup";
 
         const Data = {
             name:formData.name,
             lastName: formData.lastName,
             email: formData.email,
+            // phone:"0503543823",
             phone:formData.areaCode+formData.phone,
             password: formData.password
         };
@@ -62,6 +74,10 @@ export default function SignUp(setIsAuthenticated) {
             const response = await axios.post(url, Data);
             return navigate('/log-in')
         } catch (error) {
+            if (error.response && error.response.status === 400 && error.response.data.message === 'This email exists in the system') {
+                event.target[2].setCustomValidity('Email already exists. Please enter a different email address.');
+                return event.target[2].reportValidity();
+            }
             console.error(error); // Handle any errors here
         }
     };
