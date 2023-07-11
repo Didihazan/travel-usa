@@ -22,7 +22,7 @@ function App() {
                     <Route path='/services' element={<Services/>}/>
                     <Route path='/stays' element={<BookingForm/>}/>
                     <Route path='/gallery' element={<Gallery/>}/>
-                    <Route path='/sign-up' element={<SignUp/>}/>
+                    <Route path='/sign-up' element={<SignUp />}/>
                     <Route path='/log-in'
                            element={<Login setIsAuthenticated={setIsAuthenticated} user={user} setuser={setUser}/>}/>
                 </Switch>
