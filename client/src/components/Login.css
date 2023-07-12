@@ -1,6 +1,6 @@
 
 .login-container {
-    background-image: url('/public/images/img-home.jpg');
+    background-image: url('../../public/images/img-home.jpg');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
