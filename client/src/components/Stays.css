@@ -1,5 +1,5 @@
 body{
-    background-image: url('/public/images/hotel.jpg');
+    background-image: url('../../public/images/hotel.jpg');
     background-position: center;
     background-repeat: no-repeat;
     background-size:100%;
@@ -51,7 +51,7 @@ body{
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 800px;
 }
