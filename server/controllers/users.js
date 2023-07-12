@@ -12,10 +12,18 @@ module.exports = {
         try {
             const {name,lastName, email,phone, password } = req.body;
             const hash = await hashAsync(password, 10);
-            const existingUser = await User.findOne({ email });
-            if (existingUser) {
+            const [existingEmail, existingPhone] = await Promise.all([
+                User.findOne({ email }),
+                User.findOne({ phone })
+            ]);
+            if (existingEmail) {
                 return res.status(400).json({
                     message: 'This email exists in the system'
+                });
+            }
+            if (existingPhone) {
+                return res.status(400).json({
+                    message: 'This phone exists in the system'
                 });
             }
 
