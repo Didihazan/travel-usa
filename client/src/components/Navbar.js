@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from './Button';
-import { Link } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import './Navbar.css';
+import axios from "axios";
 
 function Navbar(prop) {
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
-
+    const navigate = useNavigate();
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);
 
@@ -19,8 +20,33 @@ function Navbar(prop) {
     };
 
     useEffect(() => {
+        console.log('nav')
+
         showButton();
+        fetchData()
     }, []);
+    const fetchData = async () => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            prop.setIsAuthenticated(true)
+            try {
+                const response = await axios.get('http://localhost:3001/users/token', {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                prop.setuser(response.data.userId)
+                // Handle the response as needed
+            } catch (error) {
+                prop.setIsAuthenticated(false)
+                console.log('Token is not valid');
+                return navigate('/log-in')
+            }
+        } else {
+            console.log('Token does not exist');
+            return navigate('/log-in')
+        }
+    };
 
     window.addEventListener('resize', showButton);
 
