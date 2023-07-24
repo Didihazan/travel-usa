@@ -49,10 +49,9 @@ module.exports = {
     },
     login: async (req, res) => {
         try {
-            const { email, password } = req.body;
+            const { email, rememberMe ,password} = req.body;
 
-            const users = await User.find({ email });
-
+            const users = await User.find({ email }).select("+password");
             if (users.length === 0) {
                 return res.status(401).json({
                     message: 'Auth failed'
@@ -60,20 +59,22 @@ module.exports = {
             }
 
             const [user] = users;
-
             const result = await compareAsync(password, user.password);
+
 
             if (result) {
                 const token = jwt.sign({
                     id: user._id,
                     email: user.email,
+                    phone: user.phone
                 }, process.env.JWT_KEY, {
-                    expiresIn: "1H"
+                    expiresIn: rememberMe?'20d':"3d"
                 });
 
                 return res.status(200).json({
                     message: 'Auth successful',
-                    token
+                    token,
+                    userId:user._id
                 });
             }
 
@@ -82,9 +83,27 @@ module.exports = {
             });
         } catch (error) {
             res.status(500).json({
-                error
+               message:error.message
             });
 
         }
+    },
+    getId: (req, res) => {
+        try {
+            // Retrieve the user ID from the authenticated request
+            const userId = req.user.id;
+            res.status(200).json({
+                status: 'Success',
+                message: 'Token exists',
+                userId: userId
+            });
+        } catch (error) {
+            console.log(error)
+            res.status(401).json({
+                status: 'Fail',
+                message: error.message
+            });
+        }
     }
+
 }
