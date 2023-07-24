@@ -1,39 +1,50 @@
-import {useState} from "react";
+
 import {useNavigate} from "react-router-dom";
 import {FaFacebook, FaGoogle, FaMobileAlt} from "react-icons/fa";
 import "../Login.css";
 import "../../App.css";
+import axios from "axios";
+import {useState} from "react";
 
 
 export default function Login(prop) {
-    let navigate = useNavigate();
-    const [rememberMe, setRememberMe] = useState(false);
+    const navigate = useNavigate();
+    const [formData, setFormData] = useState({
+        email: '',
+        rememberMe:false,
+        password: ''
+    });
 
-    const HandleLogin = (event) => {
+    const HandleLogin = async (event) => {
         event.preventDefault();
-        const name = event.target[0].value;
-        const pass = event.target[1].value;
-
-        let url = "http://localhost:3001/users";
-        fetch(url)
-            .then((result) => result.json())
-            .then((data) => {
-                data.forEach((user) => {
-                    if (user.password === pass && user.userName === name) {
-                        prop.setIsAuthenticated(true);
-                        prop.setUser(user);
-                    }
-                });
-            });
-
-        if (prop.user) {
-            return navigate("/");
+        const url = "http://localhost:3001/users/login";
+        const Data = {
+            email: formData.email,
+            rememberMe:formData.rememberMe,
+            password: formData.password
+        }
+        try {
+           const res= await axios.post(url, Data);
+            const token = res.data.token;
+            prop.setIsAuthenticated(true)
+            prop.setuser(res.data.userId)
+            localStorage.setItem('token', token);
+            return navigate("/")
+        }catch (error){
+            console.error(error);
         }
     };
+    const handleChange = event => {
+        const { name, value, checked, type } = event.target;
+        const newValue = type === 'checkbox' ? checked : value; // Use checked for checkboxes
 
-    const handleRememberMe = () => {
-        setRememberMe(!rememberMe);
+        setFormData({
+            ...formData,
+            [name]: newValue
+        });
+
     };
+
 
     return (
 
@@ -41,20 +52,27 @@ export default function Login(prop) {
             <form className="login-form" onSubmit={HandleLogin}>
                 <input
                     type="email"
+                    name="email"
                     placeholder="Email.."
+                    defaultValue={formData.email}
+                    onChange={handleChange}
                     className="login-input"
                 />
                 <input
                     type="password"
                     placeholder="Password.."
                     className="login-input"
+                    name="password"
+                    onChange={handleChange}
+                    defaultValue={formData.password}
                 />
                 <div className="remember-me">
                     <input
                         type="checkbox"
+                        name="rememberMe"
                         id="rememberMe"
-                        checked={rememberMe}
-                        onChange={handleRememberMe}
+                        checked={formData.rememberMe}
+                        onChange={handleChange}
                     />
                     <label htmlFor="rememberMe">Remember me</label>
                 </div>
