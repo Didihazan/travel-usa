@@ -10,6 +10,7 @@ import Login from "./components/pages/Login";
 import MobileLogin from "./components/pages/MobileLogin";
 import Orders from "./components/pages/Orders";
 import './App.css';
+import LogOut from "./components/pages/logOut";
 
 
 
@@ -30,8 +31,9 @@ function App() {
                     <Route path='/sign-up' element={<SignUp/>}/>
                     <Route path='/log-in'
                            element={<Login setIsAuthenticated={setIsAuthenticated} setuser={setUser}/>}/>
-                    <Route path='/orders' element={<Orders/>}/>
+                    <Route path='/orders' element={isAuthenticated?<Orders/>:<Login/>}/>
                     <Route path='/mobile-login' element={<MobileLogin/>}/>
+                    <Route path='/Log-out' element={isAuthenticated?<LogOut/>:<Home/>}/>
                 </Switch>
             </Router>
         </>

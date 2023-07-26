@@ -3,6 +3,7 @@ import {Button} from './Button';
 import {Link, useNavigate} from 'react-router-dom';
 import axios from "axios";
 import './Navbar.css';
+import LogOut from "./pages/logOut";
 
 function Navbar(prop) {
     const [click, setClick] = useState(false);
@@ -111,11 +112,11 @@ function Navbar(prop) {
                     )}
                     <li className='login-button-navbar'>
                         <Link
-                            to='/log-in'
+                            to={prop.isAuthenticated?'Log-out':'log-in'}
                             className='login-nav-links'
                             onClick={closeMobileMenu}
                         >
-                            LOG IN
+                            {prop.isAuthenticated?<LogOut/>:'LOG IN'}
                         </Link>
                     </li>
                     <li className='shopping-cart'>
