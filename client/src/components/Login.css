@@ -1,6 +1,6 @@
 
 .login-container {
-    background-image: url('../../public/images/img-home.jpg');
+    background-image: url('/public/images/img-home.jpg');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -8,20 +8,36 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
+position: relative;
 }
 
+.log-in-label{
+    font-size: 28px;
+    margin-right: 10em;
+}
+.sign-up-link{
+    margin-left: 10em;
+    display: inline;
+}
+.signup-href{
+    color: rgba(204, 46, 112, 0.8);
+    text-decoration: none;
+}
+.field-title{
+    margin-right: 5em;
+}
 .login-form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 280px;
+    height: 355px;
     width: 400px;
     padding: 20px;
     background-color: rgba(46, 204, 101, 0.4);
     border-radius: 5px;
     position: fixed;
     left: 50%;
-    top: 50%;
+    top: 45%;
     transform: translate(-50%, -50%);
 }
 
@@ -76,11 +92,10 @@
 .line {
     border: none;
     border-top: 2px solid #ccc;
-    margin-top: 15vh;
+    margin-top: 10vh;
 }
 
 .or-text {
-    /*margin-top: -12px;*/
     padding: 0 10px;
     font-size: 17px;
     color: #ffffff;
@@ -94,10 +109,10 @@
 }
 
 .icon-container {
-    background-color: #eee;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    background-color: rgba(238, 238, 238, 0.49);
+    border-radius: 10%;
+    width: 60px;
+    height: 60px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -105,8 +120,16 @@
 }
 
 .icon {
-    color: #333;
-    font-size: 20px;
+    color: #605757;
+    font-size: 25px;
+}
+.icon-google {
+    color: #dc1e1e;
+    font-size: 25px;
+}
+.icon-facebook{
+    color: #2374e1;
+    font-size: 25px;
 }
 
 @media (max-width: 768px) {
