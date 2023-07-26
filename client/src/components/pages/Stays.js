@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../Stays.css';
@@ -10,7 +10,6 @@ export default function BookingForm() {
     const [checkInDate, setCheckInDate] = useState(null);
     const [checkOutDate, setCheckOutDate] = useState(null);
     const [numPeople, setNumPeople] = useState(1);
-
     const handleAreaChange = (event) => {
         setArea(event.target.value);
     };
@@ -92,78 +91,81 @@ export default function BookingForm() {
         setSelectedDestination(null);
     };
 
+
     return (
         <Layout>
-            <div className="container">
+            <div className="main-stays">
                 <div className="h2">
                     <h2>Resorts</h2>
                 </div>
                 <div className="h3">
                     <h3>Treat yourself! Your dream resort stay is just a few clicks away.</h3>
                 </div>
-              {/*Form*/}
-        <div className="booking-form-container">
-                <form className="booking-form" onSubmit={handleSubmit}>
-                <div className="form-field">
-                    <label>Location:</label>
-                    <input
-                        type="text"
-                        placeholder="Enter location"
-                        value={area}
-                        onChange={handleAreaChange}
-                    />
-                </div>
+                {/*Form*/}
+                <div className="booking-form-container">
+                    <form className="booking-form" onSubmit={handleSubmit}>
+                        <div className="form-field">
+                            <label>Location:</label>
+                            <input
+                                type="text"
+                                placeholder="Enter location"
+                                value={area}
+                                onChange={handleAreaChange}
+                            />
+                        </div>
 
-                <div className="form-field">
-                    <label>Check-in Date:</label>
-                    <DatePicker
-                        selected={checkInDate}
-                        onChange={handleCheckInDateChange}
-                        placeholderText="Select check-in date"
-                        dateFormat="dd/MM/yyyy"
-                        minDate={currentDate}
-                        isClearable
-                        showPopperArrow={false}
-                    />
-                </div>
+                        <div className="form-field">
+                            <label>Check-in Date:</label>
+                            <DatePicker
+                                selected={checkInDate}
+                                onChange={handleCheckInDateChange}
+                                placeholderText="Check-in date"
+                                dateFormat="dd/MM/yyyy"
+                                minDate={currentDate}
+                                isClearable
+                                showPopperArrow={false}
+                            />
+                        </div>
 
-                <div className="form-field">
-                    <label>Check-out Date:</label>
-                    <DatePicker
-                        selected={checkOutDate}
-                        onChange={handleCheckOutDateChange}
-                        placeholderText="Select check-out date"
-                        dateFormat="dd/MM/yyyy"
-                        minDate={checkInDate || currentDate}
-                        isClearable
-                        showPopperArrow={false}
-                    />
-                </div>
+                        <div className="form-field">
+                            <label>Check-out Date:</label>
+                            <DatePicker
+                                selected={checkOutDate}
+                                onChange={handleCheckOutDateChange}
+                                placeholderText="Check-out date"
+                                dateFormat="dd/MM/yyyy"
+                                minDate={checkInDate || currentDate}
+                                isClearable
+                                showPopperArrow={false}
+                            />
+                        </div>
 
-                <div className="form-field">
-                    <label>Number of People:</label>
-                    <div className="number-input">
-                        <button type="button" onClick={handleDecrement}>
-                            -
+                        <div className="form-field">
+                            <label>Number of People:</label>
+                            <div className="number-input">
+                                <button type="button" onClick={handleDecrement}>
+                                    -
+                                </button>
+                                <input
+                                    type="number"
+                                    min="1"
+                                    value={numPeople}
+                                    onChange={handleNumPeopleChange}
+                                />
+                                <button type="button" onClick={handleIncrement}>
+                                    +
+                                </button>
+                            </div>
+                        </div>
+
+                        <button type="submit" className="search-button">
+                            Search
                         </button>
-                        <input
-                            type="number"
-                            min="1"
-                            value={numPeople}
-                            onChange={handleNumPeopleChange}
-                        />
-                        <button type="button" onClick={handleIncrement}>
-                            +
-                        </button>
-                    </div>
+                    </form>
                 </div>
+            </div>
 
-                <button type="submit" className="search-button">
-                    Search
-                </button>
-            </form>
-        </div>
-                {/*Cards*/}
+            {/*Cards*/}
             <div className="featured-destinations">
                 {destinations.map((destination) => (
                     <div className="destination-card" key={destination.id}>
@@ -187,10 +189,10 @@ export default function BookingForm() {
                     </div>
                 </div>
             )}
+
+            <div className="pSentence">
+                <p>“We travel not to escape life, but for life not to escape us”</p>
             </div>
-<div className="pSentence">
-    <p>“We travel not to escape life, but for life not to escape us”</p>
-</div>
         </Layout>
     );
 }

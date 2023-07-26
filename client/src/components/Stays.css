@@ -1,25 +1,26 @@
-body{
-    background-image: url('../../public/images/hotel.jpg');
+/* Stays.css */
+
+.main-stays {
+    /*max-width: 1200px;*/
+    /*margin: 0 auto;*/
+    padding: 20px;
+    height: 30rem;
+    background-image: url('/public/images/hotel.jpg');
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-size:100%;
-    height: 40vh;
-}
-
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    min-height: 100vh;
-    padding: 20px;
 }
 
 .h2 {
     font-size: 31px;
     text-align: center;
     margin-top: 50px;
-    margin-right: 44%;
+    margin-right: 46%;
+}
+
+.h2 h2 {
+    font-size: 36px;
+    color: #333;
 }
 
 .h3 {
@@ -29,14 +30,25 @@ body{
     margin-bottom: 50px;
     margin-right: 12%;
 }
+
+.h3 h3 {
+    font-size: 20px;
+    color: #666;
+}
 .pSentence {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.pSentence p {
     text-align: center;
     margin-top: 20px;
     margin-bottom: 50px;
     font-size: 28px;
     font-style: italic;
+    /*font-size: 20px;*/
+    color: #666;
 }
-/*Form*/
 .booking-form-container {
     display: flex;
     justify-content: center;
@@ -174,7 +186,7 @@ body{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-top: 14%;
+    margin-top: 5%;
 }
 
 .destination-card {
@@ -269,10 +281,13 @@ body{
 
 
 /* עיצוב רספונסיבי */
-@media (max-width: 767px) {
+@media screen and (max-width: 768px) {
+    .main-stays{
+        margin-bottom: 10rem;
+    }
     .h2{
         text-align: center;
-        margin-left: auto;
+        /*margin-left: auto;*/
     }
     .booking-form {
         flex-direction: column;
@@ -287,14 +302,9 @@ body{
     .search-button {
         margin-top: 10px;
     }
-}
-@media screen and (max-width: 768px) {
-    .h2{
-        text-align: center;
-        margin-left: auto;
-    }
+
     .destination-card {
-        width: calc(50% - 10px);
+        width: calc(50% - 20px);
     }
 
     .destination-card:nth-child(2n) {
@@ -315,37 +325,5 @@ body{
 
     .popup-content button {
         font-size: 1.1rem;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .h2{
-        text-align: center;
-        margin-left: auto;
-    }
-    .destination-card {
-        width: 100%;
-    }
-
-    .destination-card:last-child {
-        margin-bottom: 0;
-    }
-
-    .popup-content {
-        width: 100%;
-        height: 100%;
-        border-radius: 0;
-    }
-
-    .popup-content h2 {
-        font-size: 1.5rem;
-    }
-
-    .popup-content p {
-        font-size: 1rem;
-    }
-
-    .popup-content button {
-        font-size: 1rem;
     }
 }
