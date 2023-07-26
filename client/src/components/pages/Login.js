@@ -1,11 +1,9 @@
-
-import {useNavigate} from "react-router-dom";
-import {FaFacebook, FaGoogle, FaMobileAlt} from "react-icons/fa";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { FaFacebook, FaGoogle, FaMobileAlt } from "react-icons/fa";
 import "../Login.css";
 import "../../App.css";
 import axios from "axios";
-import {useState} from "react";
-
 
 export default function Login(prop) {
     const navigate = useNavigate();
@@ -24,7 +22,7 @@ export default function Login(prop) {
             password: formData.password
         }
         try {
-           const res= await axios.post(url, Data);
+            const res= await axios.post(url, Data);
             const token = res.data.token;
             prop.setIsAuthenticated(true)
             prop.setuser(res.data.userId)
@@ -47,9 +45,13 @@ export default function Login(prop) {
 
 
     return (
-
         <div className="login-container">
             <form className="login-form" onSubmit={HandleLogin}>
+                <div className="log-in-label">Log in<br></br></div>
+                <div className="sign-up-link"><br></br>
+                        Need an account? <a href="/sign-up" className="signup-href">Sign up</a>
+                </div>
+
                 <input
                     type="email"
                     name="email"
@@ -80,22 +82,22 @@ export default function Login(prop) {
                     Log In
                 </button>
             </form>
+
             <div className="login-options">
-                <hr className="line"/>
+                <hr className="line" />
                 <span className="or-text">or use one of these options</span>
                 <div className="login-icons">
-                    <div className="icon-container">
-                        <FaFacebook className="icon"/>
-                    </div>
-                    <div className="icon-container">
-                        <FaGoogle className="icon"/>
-                    </div>
-                    <div className="icon-container">
-                        <FaMobileAlt className="icon"/>
-                    </div>
+                    <Link to="https://www.facebook.com/" target="_blank" className="icon-container">
+                        <FaFacebook className="icon-facebook" />
+                    </Link>
+                    <Link to="https://www.google.com/" target="_blank" className="icon-container">
+                        <FaGoogle className="icon-google" />
+                    </Link>
+                    <Link to="/mobile-login" target="_blank" className="icon-container">
+                        <FaMobileAlt className="icon" />
+                    </Link>
                 </div>
             </div>
         </div>
-
     );
 }
