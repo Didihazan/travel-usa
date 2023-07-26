@@ -65,7 +65,7 @@ export default function Login(prop) {
             <form className="login-form" onSubmit={HandleLogin}>
                 <div className="log-in-label">Log in<br></br></div>
                 <div className="sign-up-link"><br></br>
-                        Need an account? <a href="/sign-up" className="signup-href">Sign up</a>
+                    Need an account? <Link to="/sign-up" className="signup-href">Sign up</Link>
                 </div>
 
                 <input
@@ -110,7 +110,7 @@ export default function Login(prop) {
                     <Link to="https://www.google.com/" target="_blank" className="icon-container">
                         <FaGoogle className="icon-google" />
                     </Link>
-                    <Link to="/mobile-login" target="_blank" className="icon-container">
+                    <Link to="/mobile-login"  className="icon-container">
                         <FaMobileAlt className="icon" />
                     </Link>
                 </div>

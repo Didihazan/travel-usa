@@ -112,7 +112,7 @@ function Navbar(prop) {
                     )}
                     <li className='login-button-navbar'>
                         <Link
-                            to={prop.isAuthenticated?'Log-out':'log-in'}
+                            to={prop.isAuthenticated?'/Log-out':'/log-in'}
                             className='login-nav-links'
                             onClick={closeMobileMenu}
                         >
@@ -121,11 +121,11 @@ function Navbar(prop) {
                     </li>
                     <li className='shopping-cart'>
                         <Link
-                            to='/orders'
+                            to={prop.isAuthenticated?'/orders':'/log-in'}
                             className='nav-links-icon'
                             onClick={closeMobileMenu}
                         >
-                            <i className='fas fa-shopping-cart'/>
+                            {prop.isAuthenticated && <i className='fas fa-shopping-cart'/>}
                         </Link>
                     </li>
                 </div>
