@@ -1,0 +1,11 @@
+.mainOrder {
+    background-color: white;
+    /*background-image: url('/public/images/img-home.jpg');*/
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}

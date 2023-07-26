@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Button } from './Button';
+import React, {useEffect, useState} from 'react';
+import {Button} from './Button';
 import {Link, useNavigate} from 'react-router-dom';
-import './Navbar.css';
 import axios from "axios";
+import './Navbar.css';
 
 function Navbar(prop) {
     const [click, setClick] = useState(false);
@@ -103,19 +103,30 @@ function Navbar(prop) {
                                 Sign Up
                             </Link>
                         </li>
-
-                        <li>
-                            <Link
-                                to='/log-in'
-                                className='nav-links-mobile'
-                                onClick={closeMobileMenu}
-                            >
-                                Log in
-                            </Link>
-                        </li>
                     </ul>
-                    {button && !prop.isAuthenticated && <Button buttonStyle='btn--outline' path='/sign-up'>SIGN UP</Button>}
-                    {button && !prop.isAuthenticated &&<Button buttonStyle='btn--outline' path='/log-in'>LOG IN</Button>}
+                    {button && !prop.isAuthenticated && (
+                        <Button buttonStyle='btn--outline' path='/sign-up'>
+                            SIGN UP
+                        </Button>
+                    )}
+                    <li className='login-button-navbar'>
+                        <Link
+                            to='/log-in'
+                            className='login-nav-links'
+                            onClick={closeMobileMenu}
+                        >
+                            LOG IN
+                        </Link>
+                    </li>
+                    <li className='shopping-cart'>
+                        <Link
+                            to='/orders'
+                            className='nav-links-icon'
+                            onClick={closeMobileMenu}
+                        >
+                            <i className='fas fa-shopping-cart'/>
+                        </Link>
+                    </li>
                 </div>
             </nav>
         </>
