@@ -7,6 +7,7 @@ import axios from "axios";
 
 export default function Login(prop) {
     const navigate = useNavigate();
+    const [errorMessage,setErrorMessage]= useState('')
     const [formData, setFormData] = useState({
         email: '',
         rememberMe:false,
@@ -29,6 +30,21 @@ export default function Login(prop) {
             localStorage.setItem('token', token);
             return navigate("/")
         }catch (error){
+            const { response } = error;
+            if (response && response.status === 401){
+                const { message } = response.data;
+                if (message === 'Auth failed'){
+                    setErrorMessage('לתשומת ליבך:המייל או סיסמה שגויים, נסה שנית')
+                }
+                if(message === 'pass failed'){
+                    const passwordInput = event.target[1];
+                    passwordInput.setCustomValidity('לתשומת ליבך:הסיסמה שגויה, נסה שנית');
+                    passwordInput.addEventListener('input', () => {
+                        passwordInput.setCustomValidity('');
+                    });
+                    return passwordInput.reportValidity();
+                }
+            }
             console.error(error);
         }
     };
@@ -78,6 +94,7 @@ export default function Login(prop) {
                     />
                     <label htmlFor="rememberMe">Remember me</label>
                 </div>
+                <p>{errorMessage}</p>
                 <button type="submit" className="login-button">
                     Log In
                 </button>
