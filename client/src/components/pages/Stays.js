@@ -1,10 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../Stays.css';
 import '../../App.css';
 import Layout from "../Layout";
 import axios from "axios";
+
+const instance = axios.create({
+    baseURL: 'http://localhost:3001'
+});
 
 export default  function BookingForm() {
     const [area, setArea] = useState('');
@@ -20,13 +24,14 @@ export default  function BookingForm() {
     const [destinationsData,setDestinationsData]=useState(null)
     const [selectedCountry, setSelectedCountry] =useState(false)
 
-    const getCountries = async () => {
-        const response = await axios.get("http://localhost:3001/cities/state")
+    const fetchCountries = useCallback(async () => {
+        const response = await instance.get("/cities/state");
         const countries = response.data;
         setCountries(countries);
-    };
+    },[]);
+
    useEffect(()=>{
-       getCountries()
+       fetchCountries()
        fetchData()
 
    },[])
@@ -41,7 +46,7 @@ export default  function BookingForm() {
         const data =  response.data;
         setCities(data)
     }
-    const handleCityChange= (event)=> {
+    const handleCityChange = useCallback((event) => {
         setCity(event.target.value)
         const word = event.target.value.charAt(0).toUpperCase() + event.target.value.slice(1)
         const filteredCities = [];
@@ -51,7 +56,7 @@ export default  function BookingForm() {
             }
         }
         setFilteredCities(filteredCities);
-    }
+    },[cities])
     const handleAreaChange = (event) => {
         setArea(event.target.value);
         setSelectedCountry(false)
@@ -108,8 +113,15 @@ export default  function BookingForm() {
         console.log("Day:", day);
         console.log("Month:", month);
         console.log("Year:", year);
-
-        console.log(formDataObject);
+        if(!formDataObject.city){
+            const countryInput = event.target[0];
+            countryInput.setCustomValidity('country not found');
+            countryInput.addEventListener('input', () => {
+                countryInput.setCustomValidity('');
+            });
+            return countryInput.reportValidity();
+        }
+        console.log(event.target[0].value);
         // Perform search or other actions here
     };
 
@@ -124,11 +136,11 @@ export default  function BookingForm() {
     const closePopup = () => {
         setSelectedDestination(null);
     };
-    function addDays(date, days) {
+    const addDays = useCallback((date, days) => {
         const result = new Date(date);
         result.setDate(result.getDate() + days);
         return result;
-    }
+        },[])
 
     return (
         <Layout>
@@ -144,7 +156,7 @@ export default  function BookingForm() {
                     <form className="booking-form" onSubmit={handleSubmit}>
                         <div className="form-field">
                             <label>Country:</label>
-                            <input
+                            {countries.length >0 &&(<input
                                 type="text"
                                 name="country"
                                 placeholder="Enter country"
@@ -152,7 +164,9 @@ export default  function BookingForm() {
                                 onChange={handleAreaChange}
                                 required
                             />
+                            )}
                         </div>
+                        {(selectedCountry || cities.length <1) &&(
                         <div className="form-field">
                             <label>City:</label>
                             <input
@@ -161,10 +175,10 @@ export default  function BookingForm() {
                                 placeholder="Enter city"
                                 value={city}
                                 onChange={handleCityChange}
-                                disabled={!selectedCountry || cities.length <1}
                                 required
                             />
                         </div>
+                        )}
                         <div className="form-field">
                             <label>Check-in Date:</label>
                             <DatePicker
@@ -226,7 +240,7 @@ export default  function BookingForm() {
                 {destinationsData && destinationsData.map((destination) => (
                     <div className="destination-card" key={destination.id}>
                         <img
-                            src={`http://localhost:3001/images/${destination.imageSrc}`}
+                            src={`${instance.defaults.baseURL}/images/${destination.imageSrc}`}
                             alt={destination.title}
                             onClick={() => openPopup(destination)}
                         />
