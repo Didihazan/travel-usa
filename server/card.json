@@ -1,0 +1,31 @@
+[
+  {
+    "title":" Destination 1",
+    "caption": "Description of destination 1",
+    "imageSrc": "img-6.jpg",
+    "fullDescription": "efficitur vel nunc at pulvinar. Etiam sed vestibulum elit, ut venenatis urna. Aenean laoreet sapien est. Vivamus tempor quam quis nunc euismod viverra. Nam magna nisl, vehicula ac lobortis sit amet, euismod ut felis. Proin hendrerit tincidunt interdum. Suspendisse feugiat est in cursus convallis.\n\nUt purus urna, posuere sed sagittis eget, posuere quis augue. Ut laoreet nibh et tortor rhoncus, aliquam tempus dui fermentum. Vivamus ultricies erat enim, nec pharetra dui aliquam et. Donec cursus pulvinar iaculis. Curabitur fermentum mi nunc, ut finibus augue aliquam",
+    "stays": true
+  },
+
+    {
+      "title": "Destination 2",
+      "caption": "Description of destination 2",
+      "imageSrc": "img-5.jpg",
+      "fullDescription": "efficitur vel nunc at pulvinar. Etiam sed vestibulum elit, ut venenatis urna. Aenean laoreet sapien est. Vivamus tempor quam quis nunc euismod viverra. Nam magna nisl, vehicula ac lobortis sit amet, euismod ut felis. Proin hendrerit tincidunt interdum. Suspendisse feugiat est in cursus convallis. Ut purus urna, posuere sed sagittis eget, posuere quis augue. Ut laoreet nibh et tortor rhoncus, aliquam tempus dui fermentum. Vivamus ultricies erat enim, nec pharetra dui aliquam et. Donec cursus pulvinar iaculis. Curabitur fermentum mi nunc, ut finibus augue aliquam",
+      "stays": true
+    },
+    {
+      "title": "Destination 3",
+      "caption": "Description of destination 2",
+      "imageSrc": "img-3.jpg",
+      "fullDescription": "efficitur vel nunc at pulvinar. Etiam sed vestibulum elit, ut venenatis urna. Aenean laoreet sapien est. Vivamus tempor quam quis nunc euismod viverra. Nam magna nisl, vehicula ac lobortis sit amet, euismod ut felis. Proin hendrerit tincidunt interdum. Suspendisse feugiat est in cursus convallis. Ut purus urna, posuere sed sagittis eget, posuere quis augue. Ut laoreet nibh et tortor rhoncus, aliquam tempus dui fermentum. Vivamus ultricies erat enim, nec pharetra dui aliquam et. Donec cursus pulvinar iaculis. Curabitur fermentum mi nunc, ut finibus augue aliquam",
+      "stays": true
+    },
+    {
+      "title": "Destination 4",
+      "caption": "Description of destination 2",
+      "imageSrc": "img-4.jpg",
+      "fullDescription": "efficitur vel nunc at pulvinar. Etiam sed vestibulum elit, ut venenatis urna. Aenean laoreet sapien est. Vivamus tempor quam quis nunc euismod viverra. Nam magna nisl, vehicula ac lobortis sit amet, euismod ut felis. Proin hendrerit tincidunt interdum. Suspendisse feugiat est in cursus convallis. Ut purus urna, posuere sed sagittis eget, posuere quis augue. Ut laoreet nibh et tortor rhoncus, aliquam tempus dui fermentum. Vivamus ultricies erat enim, nec pharetra dui aliquam et. Donec cursus pulvinar iaculis. Curabitur fermentum mi nunc, ut finibus augue aliquam",
+      "stays": true
+    }
+  ]

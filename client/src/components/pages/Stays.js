@@ -1,17 +1,74 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../Stays.css';
 import '../../App.css';
 import Layout from "../Layout";
+import axios from "axios";
 
-export default function BookingForm() {
+export default  function BookingForm() {
     const [area, setArea] = useState('');
+    const [city, setCity] = useState('');
     const [checkInDate, setCheckInDate] = useState(null);
     const [checkOutDate, setCheckOutDate] = useState(null);
     const [numPeople, setNumPeople] = useState(1);
+    const [filteredCountries, setFilteredCountries] = useState([]);
+    const [filteredCities, setFilteredCities] = useState([]);
+   const [countries,setCountries]=useState([])
+    const [cities,setCities]=useState([])
+    const [selectedDestination, setSelectedDestination] = useState(null);
+    const [destinationsData,setDestinationsData]=useState(null)
+    const [selectedCountry, setSelectedCountry] =useState(false)
+
+    const getCountries = async () => {
+        const response = await axios.get("http://localhost:3001/cities/state")
+        const countries = response.data;
+        setCountries(countries);
+    };
+   useEffect(()=>{
+       getCountries()
+       fetchData()
+
+   },[])
+    const fetchData = async ()=>{
+        const url = "http://localhost:3001/cards/stayingCards"
+        const  response = await axios.get(url)
+        const data = response.data;
+        setDestinationsData(data.stayingCards)
+    }
+    const getCities = async country =>{
+        const response = await axios.get(`http://localhost:3001/cities/${country}`)
+        const data =  response.data;
+        setCities(data)
+    }
+    const handleCityChange= (event)=> {
+        setCity(event.target.value)
+        const word = event.target.value.charAt(0).toUpperCase() + event.target.value.slice(1)
+        const filteredCities = [];
+        for (const city of cities) {
+            if (event.target.value.length >0 && city.startsWith(word)) {
+                filteredCities.push(city);
+            }
+        }
+        setFilteredCities(filteredCities);
+    }
     const handleAreaChange = (event) => {
         setArea(event.target.value);
+        setSelectedCountry(false)
+        setCity('')
+        const word = event.target.value.charAt(0).toUpperCase() + event.target.value.slice(1)
+        if(countries.includes(word)) {
+            setArea(word)
+            setSelectedCountry(true)
+            return getCities(word)
+        }
+        const filteredCountries = [];
+        for (const country of countries) {
+            if (event.target.value.length >0 && country.startsWith(word)) {
+                filteredCountries.push(country);
+            }
+        }
+        setFilteredCountries(filteredCountries);
     };
 
     const handleCheckInDateChange = (date) => {
@@ -37,51 +94,28 @@ export default function BookingForm() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+
+        const formData = new FormData(event.target);
+        const formDataObject = {};
+
+        for (const [key, value] of formData.entries()) {
+            formDataObject[key] = value;
+        }
+        const day = checkInDate.getDate();
+        const month = checkInDate.getMonth() + 1; // Months are zero-based, so adding 1
+        const year = checkInDate.getFullYear();
+
+        console.log("Day:", day);
+        console.log("Month:", month);
+        console.log("Year:", year);
+
+        console.log(formDataObject);
         // Perform search or other actions here
     };
 
+
+
     const currentDate = new Date(); // תאריך היום הנוכחי
-
-    const destinations = [
-        {
-            id: 1,
-            title: 'Destination 1',
-            caption: 'Description of destination 1',
-            imageSrc: '/images/img-6.jpg',
-            fullDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent cursus sed nulla nec eleifend. Fusce eu vehicula magna. Ut sit amet orci ac nunc sodales faucibus porttitor nec metus. Praesent et lacus ac dolor interdum viverra. Donec luctus nulla ac sollicitudin vulputate. Sed efficitur vel nunc at pulvinar. Etiam sed vestibulum elidndisse feugiat est in cursus convallis.\n' +
-                '\n' +
-                'Ut purus urna, posuere sed sagittis eget, posuere quis augue. Ut laoreet nibh et tortor rhoncus, aliquam tempus dui fermentum. Vivamus ultricies erat enim, nec pharetra dui aliquam et. Donec cursus pulvinar iaculis. Curabitur fermentum mi nunc, ut finibus augue aliquam commodo. Donec scelerisque tellus nec mauris vestibulum euismod. Proin dolor vobortis.  id condimentum sed, ultrices vitae ligula. Quisque bibendum fermentum ligula eget iaculis. Donec dui purus, commodo eu turpis at, tempor interdum sem. Sed porttitor pulvinar sapien, eu consectetur turpis sodales non. Maecenas interdum iaculis odio at fringilla. Ut efficitur nibh vel velit molestie, vestibulum hendrerit quam euismod.',
-        },
-        {
-            id: 2,
-            title: 'Destination 2',
-            caption: 'Description of destination 2',
-            imageSrc: '/images/img-5.jpg',
-            fullDescription: 'efficitur vel nunc at pulvinar. Etiam sed vestibulum elit, ut venenatis urna. Aenean laoreet sapien est. Vivamus tempor quam quis nunc euismod viverra. Nam magna nisl, vehicula ac lobortis sit amet, euismod ut felis. Proin hendrerit tincidunt interdum. Suspendisse feugiat est in cursus convallis.\n' +
-                '\n' +
-                'Ut purus urna, posuere sed sagittis eget, posuere quis augue. Ut laoreet nibh et tortor rhoncus, aliquam tempus dui fermentum. Vivamus ultricies erat enim, nec pharetra dui aliquam et. Donec cursus pulvinar iaculis. Curabitur fermentum mi nunc, ut finibus augue aliquam',
-        },
-        {
-            id: 3,
-            title: 'Destination 3',
-            caption: 'Description of destination 2',
-            imageSrc: '/images/img-3.jpg',
-            fullDescription: 'efficitur vel nunc at pulvinar. Etiam sed vestibulum elit, ut venenatis urna. Aenean laoreet sapien est. Vivamus tempor quam quis nunc euismod viverra. Nam magna nisl, vehicula ac lobortis sit amet, euismod ut felis. Proin hendrerit tincidunt interdum. Suspendisse feugiat est in cursus convallis.\n' +
-                '\n' +
-                'Ut purus urna, posuere sed sagittis eget, posuere quis augue. Ut laoreet nibh et tortor rhoncus, aliquam tempus dui fermentum. Vivamus ultricies erat enim, nec pharetra dui aliquam et. Donec cursus pulvinar iaculis. Curabitur fermentum mi nunc, ut finibus augue aliquam',
-        },
-        {
-            id: 4,
-            title: 'Destination 4',
-            caption: 'Description of destination 2',
-            imageSrc: '/images/img-4.jpg',
-            fullDescription: 'efficitur vel nunc at pulvinar. Etiam sed vestibulum elit, ut venenatis urna. Aenean laoreet sapien est. Vivamus tempor quam quis nunc euismod viverra. Nam magna nisl, vehicula ac lobortis sit amet, euismod ut felis. Proin hendrerit tincidunt interdum. Suspendisse feugiat est in cursus convallis.\n' +
-                '\n' +
-                'Ut purus urna, posuere sed sagittis eget, posuere quis augue. Ut laoreet nibh et tortor rhoncus, aliquam tempus dui fermentum. Vivamus ultricies erat enim, nec pharetra dui aliquam et. Donec cursus pulvinar iaculis. Curabitur fermentum mi nunc, ut finibus augue aliquam',
-        },
-    ];
-
-    const [selectedDestination, setSelectedDestination] = useState(null);
 
     const openPopup = (destination) => {
         setSelectedDestination(destination);
@@ -90,7 +124,11 @@ export default function BookingForm() {
     const closePopup = () => {
         setSelectedDestination(null);
     };
-
+    function addDays(date, days) {
+        const result = new Date(date);
+        result.setDate(result.getDate() + days);
+        return result;
+    }
 
     return (
         <Layout>
@@ -105,25 +143,40 @@ export default function BookingForm() {
                 <div className="booking-form-container">
                     <form className="booking-form" onSubmit={handleSubmit}>
                         <div className="form-field">
-                            <label>Location:</label>
+                            <label>Country:</label>
                             <input
                                 type="text"
-                                placeholder="Enter location"
+                                name="country"
+                                placeholder="Enter country"
                                 value={area}
                                 onChange={handleAreaChange}
+                                required
                             />
                         </div>
-
+                        <div className="form-field">
+                            <label>City:</label>
+                            <input
+                                type="text"
+                                name="city"
+                                placeholder="Enter city"
+                                value={city}
+                                onChange={handleCityChange}
+                                disabled={!selectedCountry || cities.length <1}
+                                required
+                            />
+                        </div>
                         <div className="form-field">
                             <label>Check-in Date:</label>
                             <DatePicker
                                 selected={checkInDate}
+                                name="check-in"
                                 onChange={handleCheckInDateChange}
                                 placeholderText="Check-in date"
                                 dateFormat="dd/MM/yyyy"
                                 minDate={currentDate}
                                 isClearable
                                 showPopperArrow={false}
+                                required
                             />
                         </div>
 
@@ -131,12 +184,14 @@ export default function BookingForm() {
                             <label>Check-out Date:</label>
                             <DatePicker
                                 selected={checkOutDate}
+                                name="check-out"
                                 onChange={handleCheckOutDateChange}
                                 placeholderText="Check-out date"
                                 dateFormat="dd/MM/yyyy"
-                                minDate={checkInDate || currentDate}
+                                minDate={checkInDate ? addDays(checkInDate, 1) : currentDate}
                                 isClearable
                                 showPopperArrow={false}
+                                required
                             />
                         </div>
 
@@ -151,6 +206,7 @@ export default function BookingForm() {
                                     min="1"
                                     value={numPeople}
                                     onChange={handleNumPeopleChange}
+                                    name="people"
                                 />
                                 <button type="button" onClick={handleIncrement}>
                                     +
@@ -167,10 +223,10 @@ export default function BookingForm() {
 
             {/*Cards*/}
             <div className="featured-destinations">
-                {destinations.map((destination) => (
+                {destinationsData && destinationsData.map((destination) => (
                     <div className="destination-card" key={destination.id}>
                         <img
-                            src={destination.imageSrc}
+                            src={`http://localhost:3001/images/${destination.imageSrc}`}
                             alt={destination.title}
                             onClick={() => openPopup(destination)}
                         />
