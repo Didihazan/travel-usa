@@ -166,7 +166,7 @@ export default  function BookingForm() {
                             />
                             )}
                         </div>
-                        {(selectedCountry || cities.length <1) &&(
+                        {(selectedCountry && cities.length >1) &&(
                         <div className="form-field">
                             <label>City:</label>
                             <input
