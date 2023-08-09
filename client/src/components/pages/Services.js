@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import Layout from '../Layout';
 import '../Services.css';
 import {RiCalendarLine, RiHotelBedLine, RiMapPinLine, RiSearchLine, RiUserLine} from 'react-icons/ri';
+import {Link} from "react-router-dom";
 
 function RiAirplaneLine() {
     return null;
@@ -13,6 +14,7 @@ export default function Services() {
     const [locationFilter, setLocationFilter] = useState('');
     const [sleepingPlacesFilter, setSleepingPlacesFilter] = useState(false);
     // Add more filter states as needed
+
 
     const handleNumPeopleChange = (event) => {
         const value = event.target.value;
@@ -107,7 +109,7 @@ export default function Services() {
 
 
                         <div className="cards">
-                            <a href="/orders" className="card">
+                            <Link to="/orders" className="card">
                                 <div className="picture">
                                     <img src="../images/login.jpg" alt="Destination Picture"/>
                                 </div>
@@ -126,7 +128,7 @@ export default function Services() {
                                         <span className="details">Flight Details</span>
                                     </div>
                                 </div>
-                            </a>
+                            </Link>
                             <a href="/orders" className="card">
                                 <div className="picture">
                                     <img src="../images/img-9.jpg" alt="Destination Picture"/>
