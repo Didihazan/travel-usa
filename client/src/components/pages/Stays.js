@@ -81,6 +81,7 @@ export default  function BookingForm() {
     };
 
     const handleCheckOutDateChange = (date) => {
+        console.log(date, currentDate)
         setCheckOutDate(date);
     };
 

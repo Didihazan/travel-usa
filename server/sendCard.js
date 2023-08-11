@@ -3,12 +3,25 @@ const Card = require("./models/card");
 const CodeJSON = require("./card.json");
 
 const initializeFunction = async () => {
-    const allCards = await Card.find({});
-    console.log()
-    if (allCards.length !== CodeJSON.length) {
-        // Add _id field to each destination object
-        const cardsWithId = CodeJSON.map(card => ({ _id: new mongoose.Types.ObjectId(), ...card }));
-        Card.create(cardsWithId);
+    try {
+        const existingCardsCount = await Card.countDocuments({});
+
+        if (existingCardsCount !== CodeJSON.length) {
+            // Delete all existing cards
+            await Card.deleteMany({});
+
+            // Add _id field to each card object
+            const cardsWithId = CodeJSON.map(card => ({ _id: new mongoose.Types.ObjectId(), ...card }));
+
+            // Insert new cards
+            await Card.insertMany(cardsWithId);
+
+            console.log("Cards have been replaced and updated successfully.");
+        } else {
+            console.log("No change needed. Cards are up to date.");
+        }
+    } catch (error) {
+        console.error("An error occurred:", error);
     }
 };
 

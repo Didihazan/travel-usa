@@ -1,21 +1,34 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Layout from '../Layout';
 import '../Services.css';
 import {RiCalendarLine, RiHotelBedLine, RiMapPinLine, RiSearchLine, RiUserLine} from 'react-icons/ri';
 import {FaPlane} from "react-icons/fa";
 import {Link} from "react-router-dom";
+import axios from "axios";
+import moment from 'moment';
+
 
 function RiAirplaneLine() {
     return null;
 }
 
 export default function Services() {
+    const [cards,setCards]=useState(null)
     const [numPeople, setNumPeople] = useState(1);
     const [priceRange, setPriceRange] = useState({min: 0, max: 1000});
     const [locationFilter, setLocationFilter] = useState('');
     const [sleepingPlacesFilter, setSleepingPlacesFilter] = useState(false);
     // Add more filter states as needed
-
+    const fetchData = async ()=>{
+        const url = "http://localhost:3001/cards/getAll"
+        const  response = await axios.get(url)
+        const data = response.data;
+        setCards(data.allCards)
+        console.log(data.allCards[4].price)
+    }
+    useEffect(()=>{
+        fetchData()
+    },[])
     const handleNumPeopleChange = (event) => {
         const value = event.target.value;
         setNumPeople(value >= 1 ? value : 1);
@@ -54,7 +67,7 @@ export default function Services() {
     };
 
 
-    const [value, setValue] = useState(1000); // Default value
+    const [value, setValue] = useState(500); // Default value
 
     const handleInputChange = (e) => {
         setValue(e.target.value);
@@ -108,207 +121,28 @@ export default function Services() {
 
 
                     <div className="cards">
-                        <Link to="/orders" className="card">
-                            <div className="picture">
-                                <img src="../images/login.jpg" alt="Destination Picture"/>
-                            </div>
-                            <div className="content">
-                                <h2>Name of the Place</h2>
-                                <div className="title">
-                                    <span className="price">$500</span>
-                                    <span className="discount">$700</span>
+                        {cards && cards.map(card => (
+                            <Link to="/orders" className="card" key={card.id}>
+                                <div className="picture">
+                                    <img src={`http://localhost:3001/images/${card.imageSrc}`} alt="Destination Picture" />
                                 </div>
-                                <div className="hotel">
-                                    <RiHotelBedLine/>
-                                    <span className="dates">Vacation Dates</span>
+                                <div className="content">
+                                    <h2>{card.name_place}</h2>
+                                    <div className="title">
+                                        <span className="price">{card.price}</span>
+                                        <span className="discount">{card.discount}</span>
+                                    </div>
+                                    <div className="hotel">
+                                        <RiHotelBedLine />
+                                        <span className="dates"> {moment(card.check_in).format('DD-MM-YYYY')} -> {moment(card.check_out).format('DD-MM-YYYY')}</span>
+                                    </div>
+                                    <div className="flight">
+                                        <FaPlane />
+                                        <span className="details">{card.Flight_Details}</span>
+                                    </div>
                                 </div>
-                                <div className="flight">
-                                    <FaPlane/>
-                                    <span className="details">Flight Details</span>
-                                </div>
-                            </div>
-                        </Link>
-
-                        <Link to="/orders" className="card">
-                            <div className="picture">
-                                <img src="../images/img-9.jpg" alt="Destination Picture"/>
-                            </div>
-                            <div className="content">
-                                <h2>Name of the Place</h2>
-                                <div className="title">
-                                    <span className="price">$500</span>
-                                    <span className="discount">$700</span>
-                                </div>
-                                <div className="hotel">
-                                    <RiHotelBedLine/>
-                                    <span className="dates">Vacation Dates</span>
-                                </div>
-                                <div className="flight">
-                                    <FaPlane/>
-                                    <span className="details">Flight Details</span>
-                                </div>
-                            </div>
-                        </Link>
-                        <Link to="/orders" className="card">
-                            <div className="picture">
-                                <img src="../images/singup.jpg" alt="Destination Picture"/>
-                            </div>
-                            <div className="content">
-                                <h2>Name of the Place</h2>
-                                <div className="title">
-                                    <span className="price">$500</span>
-                                    <span className="discount">$700</span>
-                                </div>
-                                <div className="hotel">
-                                    <RiHotelBedLine/>
-                                    <span className="dates">Vacation Dates</span>
-                                </div>
-                                <div className="flight">
-                                    <FaPlane/>
-                                    <span className="details">Flight Details</span>
-                                </div>
-                            </div>
-                        </Link>
-                        <Link to="/orders" className="card">
-                            <div className="picture">
-                                <img src="../images/img-8.jpg" alt="Destination Picture"/>
-                            </div>
-                            <div className="content">
-                                <h2>Name of the Place</h2>
-                                <div className="title">
-                                    <span className="price">$500</span>
-                                    <span className="discount">$700</span>
-                                </div>
-                                <div className="hotel">
-                                    <RiHotelBedLine/>
-                                    <span className="dates">Vacation Dates</span>
-                                </div>
-                                <div className="flight">
-                                    <FaPlane/>
-                                    <span className="details">Flight Details</span>
-                                </div>
-                            </div>
-                        </Link>
-                        <Link to="/orders" className="card">
-                            <div className="picture">
-                                <img src="../images/login.jpg" alt="Destination Picture"/>
-                            </div>
-                            <div className="content">
-                                <h2>Name of the Place</h2>
-                                <div className="title">
-                                    <span className="price">$500</span>
-                                    <span className="discount">$700</span>
-                                </div>
-                                <div className="hotel">
-                                    <RiHotelBedLine/>
-                                    <span className="dates">Vacation Dates</span>
-                                </div>
-                                <div className="flight">
-                                    <FaPlane/>
-                                    <span className="details">Flight Details</span>
-                                </div>
-                            </div>
-                        </Link>
-                        <Link to="/orders" className="card">
-                            <div className="picture">
-                                <img src="../images/img-9.jpg" alt="Destination Picture"/>
-                            </div>
-                            <div className="content">
-                                <h2>Name of the Place</h2>
-                                <div className="title">
-                                    <span className="price">$500</span>
-                                    <span className="discount">$700</span>
-                                </div>
-                                <div className="hotel">
-                                    <RiHotelBedLine/>
-                                    <span className="dates">Vacation Dates</span>
-                                </div>
-                                <div className="flight">
-                                    <FaPlane/>
-                                    <span className="details">Flight Details</span>
-                                </div>
-                            </div>
-                        </Link>
-                        <Link to="/orders" className="card">
-                            <div className="picture">
-                                <img src="../images/img-8.jpg" alt="Destination Picture"/>
-                            </div>
-                            <div className="content">
-                                <h2>Name of the Place</h2>
-                                <div className="title">
-                                    <span className="price">$500</span>
-                                    <span className="discount">$700</span>
-                                </div>
-                                <div className="hotel">
-                                    <RiHotelBedLine/>
-                                    <span className="dates">Vacation Dates</span>
-                                </div>
-                                <div className="flight">
-                                    <FaPlane/>
-                                    <span className="details">Flight Details</span>
-                                </div>
-                            </div>
-                        </Link>
-                        <Link to="/orders" className="card">
-                            <div className="picture">
-                                <img src="../images/singup.jpg" alt="Destination Picture"/>
-                            </div>
-                            <div className="content">
-                                <h2>Name of the Place</h2>
-                                <div className="title">
-                                    <span className="price">$600</span>
-                                    <span className="discount">$2500</span>
-                                </div>
-                                <div className="hotel">
-                                    <RiHotelBedLine/>
-                                    <span className="dates">Vacation Dates</span>
-                                </div>
-                                <div className="flight">
-                                    <FaPlane/>
-                                    <span className="details">Flight Details</span>
-                                </div>
-                            </div>
-                        </Link>
-                        <Link to="/orders" className="card">
-                            <div className="picture">
-                                <img src="../images/img-home.jpg" alt="Destination Picture"/>
-                            </div>
-                            <div className="content">
-                                <h2>Name of the Place</h2>
-                                <div className="title">
-                                    <span className="price">$800</span>
-                                    <span className="discount">$760</span>
-                                </div>
-                                <div className="hotel">
-                                    <RiHotelBedLine/>
-                                    <span className="dates">Vacation Dates</span>
-                                </div>
-                                <div className="flight">
-                                    <FaPlane/>
-                                    <span className="details">Flight Details</span>
-                                </div>
-                            </div>
-                        </Link>
-                        <Link to="/orders" className="card">
-                            <div className="picture">
-                                <img src="../images/img-9.jpg" alt="Destination Picture"/>
-                            </div>
-                            <div className="content">
-                                <h2>Name of the Place</h2>
-                                <div className="title">
-                                    <span className="price">$300</span>
-                                    <span className="discount">$400</span>
-                                </div>
-                                <div className="hotel">
-                                    <RiHotelBedLine/>
-                                    <span className="dates">Vacation Dates</span>
-                                </div>
-                                <div className="flight">
-                                    <FaPlane/>
-                                    <span className="details">Flight Details</span>
-                                </div>
-                            </div>
-                        </Link>
+                            </Link>
+                        ))}
                     </div>
                 </div>
                 <div className="desktop-sidebar">
