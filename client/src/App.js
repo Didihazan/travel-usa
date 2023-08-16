@@ -10,7 +10,7 @@ import Login from "./components/pages/Login";
 import MobileLogin from "./components/pages/MobileLogin";
 import Orders from "./components/pages/Orders";
 import './App.css';
-import LogOut from "./components/pages/logOut";
+import LogOut from "./components/pages/LogOut";
 
 
 
