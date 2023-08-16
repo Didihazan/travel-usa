@@ -8,7 +8,7 @@ import {FaPlane} from "react-icons/fa";
 export default function Orders(props) {
 
     function handleClick() {
-
+        console.log(props.checkVacation._id)
     }
 
     return (
@@ -31,7 +31,7 @@ export default function Orders(props) {
             <FaPlane />
             <span className="details">{props.checkVacation.Flight_Details}</span>
         </div>
-        <span className="details">{props.checkVacation.Parking && <h1>ff</h1>}</span>
+        <span className="details">{props.checkVacation.Parking && <h1>{props.checkVacation._id}</h1>}</span>
         <button onClick={handleClick}>save</button>
         <button>pay</button>
     </div>

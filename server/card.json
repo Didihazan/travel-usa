@@ -17,7 +17,7 @@
     "Breakfast_included": true ,
     "Lunch_included": false,
     "Dinner_included": true,
-    "Parking": true,
+    "Parking": false,
     "Pool": true ,
     "Price_per_night": 100 ,
     "Guest_rating": 7.6,

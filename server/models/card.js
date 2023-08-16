@@ -14,135 +14,135 @@ const vacationCard = new Schema({
     },
     stays:{
         type:Boolean,
-        require,
+        require:true,
         select: false,
     },
     label:{type:String,
-    require
+        require:true
     },
     name_place:{type:String,
-    require
+        require:true
     },
     discount:{type:String,
-        require
+        require:true
     },
     check_in:{type:Date,
-    require
+        require:true
     },
     check_out:{type:Date,
-        require
+        require:true
     },
     Guests:{type:Number,
-    require
+        require:true
     },
     Flight_Details:{type:String,
-        require
+        require:true
     },
     Airport_shuttle_included:{
         type:Boolean,
-        require
+        require:true
     },
     Breakfast_included:{
         type:Boolean,
-        require
+        require:true
     },
     Lunch_included:{
         type:Boolean,
-        require
+        require:true
     },
     Dinner_included:{
         type:Boolean,
-        require
+        require:true
     },
     Parking:{
         type:Boolean,
-        require
+        require:true
     },
     Pool:{
         type:Boolean,
-        require
+        require:true
     },
     price:{type:String,
-    require},
+        require:true},
     Price_per_night:{type:Number,
-        require
+        require:true
     },
     Guest_rating:{type:Number,
-        require
+        require:true
     },
     Star_rating:{type:Number,
-        require
+        require:true
     },
     Pet_friendly:{
         type:Boolean,
-        require
+        require:true
     },
     Hot_tub:{
         type:Boolean,
-        require
+        require:true
     },
     Kitchen:{
         type:Boolean,
-        require
+        require:true
     },
     Wifi:{
         type:Boolean,
-        require
+        require:true
     },
     Spa:{
         type:Boolean,
-        require
+        require:true
     },
     Cribs:{
         type:Boolean,
-        require
+        require:true
     },
     Ocean_view:{
         type:Boolean,
-        require
+        require:true
     },
     Restaurant:{
         type:Boolean,
-        require
+        require:true
     },
     Electric_car_charging_station:{
         type:Boolean,
-        require
+        require:true
     },
     Air_conditioned:{
         type:Boolean,
-        require
+        require:true
     },
     Gym:{
         type:Boolean,
-        require
+        require:true
     },
     Water_park:{
         type:Boolean,
-        require
+        require:true
     },
     In_room_accessibility:{
         type:Boolean,
-        require
+        require:true
     },
     Accessible_bathroom:{
         type:Boolean,
-        require
+        require:true
     },
     Elevator:{
         type:Boolean,
-        require
+        require:true
     },
     Fully_refundable:{
         type:Boolean,
-        require
+        require:true
     },
     ReserveNow_payLater:{
         type:Boolean,
-        require
+        require:true
     },
     PropertyType:{type:String,
-        require
+        require:true
     }
 })
 module.exports = model('Card', vacationCard)
