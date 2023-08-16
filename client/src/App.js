@@ -18,6 +18,7 @@ import LogOut from "./components/pages/LogOut";
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [user, setUser] = useState({})
+    const [checkVacation , setCheckVacation] = useState(null)
     return (
         <>
             <Router>
@@ -26,13 +27,13 @@ function App() {
                         setuser={setUser}/>
                 <Switch>
                     <Route path='/' element={<Home/>}/>
-                    <Route path='/services' element={isAuthenticated?<Services/>:<Login/>}/>
+                    <Route path='/services' element={isAuthenticated?<Services setCheckVacation={setCheckVacation} />:<Login/>}/>
                     <Route path='/stays' element={isAuthenticated?<BookingForm/>:<Login/>}/>
                     <Route path='/gallery' element={isAuthenticated?<Gallery/>:<Login/>}/>
                     <Route path='/sign-up' element={<SignUp/>}/>
                     <Route path='/log-in'
                            element={<Login setIsAuthenticated={setIsAuthenticated} setuser={setUser}/>}/>
-                    <Route path='/orders' element={isAuthenticated?<Orders/>:<Login/>}/>
+                    <Route path='/orders' element={isAuthenticated?<Orders checkVacation={checkVacation} />:<Login/>}/>
                     <Route path='/mobile-login' element={<MobileLogin/>}/>
                     <Route path='/Log-out' element={isAuthenticated?<LogOut/>:<Home/>}/>
                 </Switch>

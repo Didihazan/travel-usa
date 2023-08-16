@@ -12,7 +12,7 @@ function RiAirplaneLine() {
     return null;
 }
 
-export default function Services() {
+export default function Services(props) {
     const [cards,setCards]=useState(null)
     const [numPeople, setNumPeople] = useState(1);
     const [priceRange, setPriceRange] = useState({min: 0, max: 1000});
@@ -467,7 +467,7 @@ export default function Services() {
                     </div>
                     <div className="cards">
                         {cards && cards.map(card => (
-                            <Link to="/orders" className="card" key={card.id}>
+                            <Link to="/orders" className="card" key={card.id} onClick={()=>{props.setCheckVacation(card)}}>
                                 <div className="picture">
                                     <img src={`http://localhost:3001/images/${card.imageSrc}`} alt="Destination Picture" />
                                 </div>
@@ -487,6 +487,7 @@ export default function Services() {
                                     </div>
                                 </div>
                             </Link>
+
                         ))}
                     </div>
 
