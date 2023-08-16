@@ -14,6 +14,7 @@ import LogOut from "./components/pages/LogOut";
 
 
 
+
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [user, setUser] = useState({})

@@ -3,7 +3,8 @@ import {Button} from './Button';
 import {Link, useNavigate} from 'react-router-dom';
 import axios from "axios";
 import './Navbar.css';
-import LogOut from "./pages/logOut";
+import LogOut from "./pages/LogOut";
+
 
 function Navbar(prop) {
     const [click, setClick] = useState(false);
