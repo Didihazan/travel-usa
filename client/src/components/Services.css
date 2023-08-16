@@ -6,9 +6,14 @@
     /*display: flex;*/
     background-color: #ffffff;
     /*margin-left: 5em;*/
+    /*order: 1;*/
+    display: flex;
+    margin-top: 3%;
 }
 .main-service{
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 
 }
 
@@ -199,6 +204,7 @@
     padding: 20px;
     margin-bottom: 70rem;
     margin-left: 9%;
+    margin-top: 3%;
 
 }
 roperty-name-search {
@@ -707,7 +713,7 @@ input::-moz-focus-outer {
     }
 }
 
-@media (max-width: 1170px ) {
+@media (max-width: 960px ) {
     .desktop-sidebar {
         display: none;
     }
