@@ -9,33 +9,26 @@ import moment from 'moment';
 
 
 function RiAirplaneLine() {
-    return null; // פונקציה ריקה המחזירה ערך null
+    return null;
 }
 
 export default function Services(props) {
-    // משתנים מצביעה עבור רשימת הכרטיסים והפילטרים
-    const [cards, setCards] = useState(null); // רשימת הכרטיסים
-    const [numPeople, setNumPeople] = useState(1); // מספר האנשים
-    const [priceRange, setPriceRange] = useState({ min: 0, max: 1000 }); // טווח המחירים
-    const [locationFilter, setLocationFilter] = useState(''); // פילטר מיקום
-    const [sleepingPlacesFilter, setSleepingPlacesFilter] = useState(false); // פילטר מספר מקומות לינה
-
-
-    // ביצוע שאילתת GET לשרת לקבלת נתוני הכרטיסים
-    const fetchData = async () => {
-        const url = "http://localhost:3001/cards/getAll";
-        const response = await axios.get(url);
+    const [cards,setCards]=useState(null)
+    const [numPeople, setNumPeople] = useState(1);
+    const [priceRange, setPriceRange] = useState({min: 0, max: 1000});
+    const [locationFilter, setLocationFilter] = useState('');
+    const [sleepingPlacesFilter, setSleepingPlacesFilter] = useState(false);
+    // Add more filter states as needed
+    const fetchData = async ()=>{
+        const url = "http://localhost:3001/cards/getAll"
+        const  response = await axios.get(url)
         const data = response.data;
-        setCards(data.allCards); // עדכון הרשימת כרטיסים בהתאם לנתונים שנקבלו
-        console.log(data.allCards[4].price);
+        setCards(data.allCards)
+        console.log(data.allCards[4].price)
     }
-
-    // פונקציה הנקראת בעת טעינת הדף
-    useEffect(() => {
-        fetchData();
-    }, []);
-
-    // פונקציות לטיפוח המספר של האנשים בסל
+    useEffect(()=>{
+        fetchData()
+    },[])
     const handleNumPeopleChange = (event) => {
         const value = event.target.value;
         setNumPeople(value >= 1 ? value : 1);
@@ -49,39 +42,37 @@ export default function Services(props) {
         setNumPeople((prevNum) => (prevNum > 1 ? prevNum - 1 : 1));
     };
 
-    // פונקציות לטיפוח טווח המחירים
     const handlePriceRangeChange = (event) => {
         const value = parseInt(event.target.value);
-        const { min, max } = priceRange;
+        const {min, max} = priceRange;
         if (event.target.id === 'priceMin' && value < max) {
-            setPriceRange({ min: value, max });
+            setPriceRange({min: value, max});
         } else if (event.target.id === 'priceMax' && value > min) {
-            setPriceRange({ min, max: value });
+            setPriceRange({min, max: value});
         }
     };
 
-    // פונקציה לשינוי פילטר המיקום
     const handleLocationFilterChange = (event) => {
         setLocationFilter(event.target.value);
     };
 
-    // פונקציה לשינוי פילטר מספר מקומות לינה
     const handleSleepingPlacesFilterChange = (event) => {
         setSleepingPlacesFilter(event.target.checked);
     };
 
-    // פונקציה לסינון התוצאות לפי הפילטרים הנבחרים
+    // Apply filtering logic based on the selected filter options
     const filterResults = () => {
-
+        // Implement filtering logic based on the selected filters
+        // Update the display of results accordingly
     };
 
-    // משתנה מצביעה עבור הערך של המחיר הנבחר (ברירת מחדל 500)
-    const [value, setValue] = useState(500);
 
-    // פונקציה לטיפוח שדה הקלט של המחיר
+    const [value, setValue] = useState(500); // Default value
+
     const handleInputChange = (e) => {
         setValue(e.target.value);
     };
+
 
     return (
         <Layout>
