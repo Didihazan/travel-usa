@@ -479,7 +479,7 @@ export default function Services(props) {
                                     </div>
                                     <div className="hotel">
                                         <RiHotelBedLine />
-                                        <span className="dates"> {moment(card.check_in).format('DD-MM-YYYY')} -> {moment(card.check_out).format('DD-MM-YYYY')}</span>
+                                       <span className="dates"> {moment(card.check_in).format('MMM DD')} - {moment(card.check_out).format('MMM DD, YYYY')}</span>
                                     </div>
                                     <div className="flight">
                                         <FaPlane />
