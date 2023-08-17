@@ -5,7 +5,6 @@ import axios from "axios";
 import './Navbar.css';
 import LogOut from "./pages/LogOut";
 
-
 function Navbar(prop) {
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
@@ -51,6 +50,18 @@ function Navbar(prop) {
     };
 
     window.addEventListener('resize', showButton);
+
+
+//מספר פריטים בעגלה
+    const [cartItemsCount, setCartItemsCount] = useState(0);
+
+    // Function to add item to cart
+    const addItemToCart = () => {
+        // Your logic to add item to cart goes here
+
+        // Update cart items count
+        setCartItemsCount(cartItemsCount + 1);
+    };
 
     return (
         <>
@@ -111,22 +122,25 @@ function Navbar(prop) {
                             SIGN UP
                         </Button>
                     )}
+
+                    <li className='shopping-cart'>
+                        <Link
+                            to='/orders'
+                            className='nav-links-icon'
+                            onClick={closeMobileMenu}
+                        >
+                            <i className='fas fa-shopping-cart' />
+                            <span className='cartItemCount'>{cartItemsCount}</span>
+                        </Link>
+                    </li>
+
                     <li className='login-button-navbar'>
                         <Link
-                            to={prop.isAuthenticated?'/Log-out':'/log-in'}
+                            to={prop.isAuthenticated?'Log-out':'log-in'}
                             className='login-nav-links'
                             onClick={closeMobileMenu}
                         >
                             {prop.isAuthenticated?<LogOut/>:'LOG IN'}
-                        </Link>
-                    </li>
-                    <li className='shopping-cart'>
-                        <Link
-                            to={prop.isAuthenticated?'/orders':'/log-in'}
-                            className='nav-links-icon'
-                            onClick={closeMobileMenu}
-                        >
-                            {prop.isAuthenticated && <i className='fas fa-shopping-cart'/>}
                         </Link>
                     </li>
                 </div>
