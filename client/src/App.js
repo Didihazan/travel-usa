@@ -33,7 +33,7 @@ function App() {
                     <Route path='/sign-up' element={<SignUp/>}/>
                     <Route path='/log-in'
                            element={<Login setIsAuthenticated={setIsAuthenticated} setuser={setUser}/>}/>
-                    <Route path='/orders' element={isAuthenticated?<Orders checkVacation={checkVacation} />:<Login/>}/>
+                    <Route path='/orders' element={isAuthenticated?<Orders checkVacation={checkVacation} user={user} />:<Login/>}/>
                     <Route path='/mobile-login' element={<MobileLogin/>}/>
                     <Route path='/Log-out' element={isAuthenticated?<LogOut/>:<Home/>}/>
                 </Switch>

@@ -1,11 +1,110 @@
 .mainOrder {
-    background-color: white;
-    /*background-image: url('/public/images/img-home.jpg');*/
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
     display: flex;
+    background-color: white;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    margin: auto;
+    height: 60vh;
+    width: 50%;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.orderContent {
+    flex: 1;
+    padding: 20px;
+}
+
+.orderTitle {
+    font-size: 34px;
+    margin-bottom: 10px;
+}
+
+.orderPrice {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.discountedPrice {
+    font-size: 22px;
+    font-weight: bold;
+    color: #333333;
+    margin-right: 10px;
+}
+
+.originalPrice {
+    font-size: 18px;
+    text-decoration: line-through;
+    color: #999;
+}
+
+.iconsColumn {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.iconRow {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.iconColumnLeft,
+.iconColumnRight {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 2%; /* מרחק בין העמודות */
+    flex: 1; /* ייפתור את כל הרוחב הפנוי בשורה */
+}
+
+.iconWithCaption {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.icon {
+    font-size: 20px;
+    margin-right: 8px;
+    color: #666;
+
+}
+
+.caption {
+    font-size: 16px;
+    color: #666;
+}
+
+.buttonsRow {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    background-color: #f39c12;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.orderPicture {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.orderPicture img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
