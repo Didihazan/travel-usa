@@ -9,6 +9,7 @@ function Navbar(prop) {
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
     const navigate = useNavigate();
+    const [test,setTest]=useState(false)
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);
 
@@ -21,11 +22,13 @@ function Navbar(prop) {
     };
 
     useEffect(() => {
-        console.log('nav')
-
         showButton();
         fetchData()
     }, []);
+    useEffect(() => {
+        if(prop.user.length >0)getOrders()
+    }, [prop.updateOrders, prop.checkVacation, prop.user]);
+
     const fetchData = async () => {
         const token = localStorage.getItem('token');
         if (token) {
@@ -51,17 +54,30 @@ function Navbar(prop) {
 
     window.addEventListener('resize', showButton);
 
-
-//מספר פריטים בעגלה
-    const [cartItemsCount, setCartItemsCount] = useState(0);
-
-    // Function to add item to cart
-    const addItemToCart = () => {
-        // Your logic to add item to cart goes here
-
-        // Update cart items count
-        setCartItemsCount(cartItemsCount + 1);
+    const getOrders = async () => {
+        try {
+            const res = await axios.get(`http://localhost:3001/order/${prop.user}`);
+            const data = res.data.orders;
+            prop.setCartItemsCount(data.length)
+            if(prop.checkVacation) {
+                const vacationExists = data.some(order => order.cardId._id === prop.checkVacation._id);
+                if (vacationExists) {
+                    // Remove the vacation from the list (if it exists) and move it to the top
+                    const filteredOrder = data.filter(order => order.cardId._id === prop.checkVacation._id);
+                    const filteredOrders = data.filter(order => order.cardId._id !== prop.checkVacation._id);
+                    return prop.setAllOrders([...filteredOrder, ...filteredOrders]);
+                } else
+                    return prop.setAllOrders([prop.checkVacation, ...data]);
+            }
+            return  prop.setAllOrders([...data])
+        } catch (error) {
+            console.error(error);
+        }
     };
+
+
+
+
 
     return (
         <>
@@ -123,20 +139,20 @@ function Navbar(prop) {
                         </Button>
                     )}
 
-                    <li className='shopping-cart'>
+                    {prop.isAuthenticated&&<li className='shopping-cart'>
                         <Link
-                            to='/orders'
+                            to={prop.isAuthenticated?'/orders':''}
                             className='nav-links-icon'
                             onClick={closeMobileMenu}
                         >
-                            <i className='fas fa-shopping-cart' />
-                            <span className='cartItemCount'>{cartItemsCount}</span>
+                            <i className='fas fa-shopping-cart'/>
+                            <span className='cartItemCount'>{prop.cartItemsCount ? prop.cartItemsCount : ''}</span>
                         </Link>
-                    </li>
+                    </li>}
 
                     <li className='login-button-navbar'>
                         <Link
-                            to={prop.isAuthenticated?'Log-out':'log-in'}
+                            to={prop.isAuthenticated?'/Log-out':'/log-in'}
                             className='login-nav-links'
                             onClick={closeMobileMenu}
                         >

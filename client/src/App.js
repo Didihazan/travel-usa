@@ -19,12 +19,23 @@ function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [user, setUser] = useState({})
     const [checkVacation , setCheckVacation] = useState(null)
+    const [allOrders,setAllOrders]= useState(null)
+    const [updateOrders,setUpdateOrders]=useState(false)
+    const [cartItemsCount, setCartItemsCount] = useState(undefined);
     return (
         <>
             <Router>
                 <Navbar isAuthenticated={isAuthenticated}
                         setIsAuthenticated={setIsAuthenticated}
-                        setuser={setUser}/>
+                        setuser={setUser}
+                        allOrders={allOrders}
+                        setAllOrders={setAllOrders}
+                        checkVacation={checkVacation}
+                        updateOrders={updateOrders}
+                        cartItemsCount={cartItemsCount}
+                        setCartItemsCount={setCartItemsCount}
+                        user={user}
+                />
                 <Switch>
                     <Route path='/' element={<Home/>}/>
                     <Route path='/services' element={isAuthenticated?<Services setCheckVacation={setCheckVacation} />:<Login/>}/>
@@ -33,7 +44,13 @@ function App() {
                     <Route path='/sign-up' element={<SignUp/>}/>
                     <Route path='/log-in'
                            element={<Login setIsAuthenticated={setIsAuthenticated} setuser={setUser}/>}/>
-                    <Route path='/orders' element={isAuthenticated?<Orders checkVacation={checkVacation} user={user} />:<Login/>}/>
+                    <Route path='/orders' element={isAuthenticated?<Orders checkVacation={checkVacation}
+                                                                           user={user}
+                                                                           updateOrders={updateOrders}
+                                                                           setUpdateOrders={setUpdateOrders}
+                                                                           allOrders={allOrders}
+                                                                           setAllOrders={setAllOrders}
+                    />:<Login/>}/>
                     <Route path='/mobile-login' element={<MobileLogin/>}/>
                     <Route path='/Log-out' element={isAuthenticated?<LogOut/>:<Home/>}/>
                 </Switch>
