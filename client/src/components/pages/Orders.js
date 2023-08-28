@@ -41,7 +41,7 @@ export default function Orders(props) {
 
     }
     return (
-        <Layout>
+        <div>
             {props.allOrders && props.allOrders.map(order =>(<div className="mainOrder">
                 <div className="orderContent" key={order._id}>
                     <h2 className="orderTitle">{order.cardId?order.cardId.name_place:order.name_place}</h2>
@@ -109,6 +109,6 @@ export default function Orders(props) {
                 </div>
             </div>
             ))}
-        </Layout>
+        </div>
     );
 }
